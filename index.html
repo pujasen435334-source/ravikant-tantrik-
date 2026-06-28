@@ -26,79 +26,71 @@
     background:var(--cream);
     color:var(--ink);
     overflow-x:hidden;
+    padding-top:0; /* NO header */
   }
   h1,h2,h3,.display{font-family:'Yeseva One',serif;}
-  .accent-script{font-family:'Cormorant Garamond',serif; font-style:italic;}
+  .accent-script{font-family:'Cormorant Garamond',serif;font-style:italic;}
 
-  .om-bg{
-    position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:0.05;
-    background-image: radial-gradient(circle at 10% 20%, var(--saffron) 0, transparent 2%),
-                       radial-gradient(circle at 80% 60%, var(--gold) 0, transparent 2%);
-  }
+  .om-bg{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:0.05;
+    background-image:radial-gradient(circle at 10% 20%,var(--saffron) 0,transparent 2%),
+    radial-gradient(circle at 80% 60%,var(--gold) 0,transparent 2%);}
 
   a{text-decoration:none;color:inherit;}
   .container{max-width:1180px;margin:0 auto;padding:0 24px;}
 
-  /* ========== SHINING BUTTON ANIMATION ========== */
-  @keyframes shine {
-    0%   { background-position: -200% center; }
-    100% { background-position: 200% center; }
-  }
-  @keyframes shimmerGold {
-    0%   { background-position: -200% center; }
-    100% { background-position: 200% center; }
-  }
-  @keyframes pulse-btn {
-    0%, 100% { box-shadow: 0 10px 30px rgba(232,116,42,0.45); }
-    50%       { box-shadow: 0 10px 42px rgba(232,116,42,0.75), 0 0 0 6px rgba(232,116,42,0.18); }
-  }
+  /* ===== SHINING ANIMATIONS ===== */
+  @keyframes shine{0%{background-position:-200% center;}100%{background-position:200% center;}}
+  @keyframes pulse-btn{0%,100%{box-shadow:0 10px 30px rgba(232,116,42,0.45);}50%{box-shadow:0 10px 42px rgba(232,116,42,0.75),0 0 0 6px rgba(232,116,42,0.18);}}
+  @keyframes slideShine{0%{left:-75%;}100%{left:130%;}}
 
-  /* ========== NAV ========== */
-  header{
-    position:fixed;top:0;left:0;right:0;z-index:1000;
-    background:linear-gradient(180deg, var(--maroon-deep), rgba(61,10,16,0.95));
-    border-bottom:1px solid rgba(205,160,74,0.35);
-  }
-  .nav-wrap{display:flex;align-items:center;justify-content:space-between;padding:12px 20px;max-width:1180px;margin:0 auto;}
-  .brand{display:flex;align-items:center;gap:10px;}
-  .brand img{width:44px;height:44px;border-radius:50%;object-fit:cover;border:2px solid var(--gold);}
-  .brand-text{color:var(--gold-light);}
-  .brand-text .name{font-family:'Yeseva One',serif;font-size:1rem;line-height:1;color:#fff;}
-  .brand-text .sub{font-size:0.65rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--gold-light);}
-  nav ul{display:flex;gap:24px;list-style:none;}
-  nav a{color:var(--gold-light);font-size:0.9rem;font-weight:500;transition:color .2s;}
-  nav a:hover{color:#fff;}
-
-  /* Nav CTA Button with shine */
-  .nav-cta{
-    display:flex;align-items:center;gap:8px;
-    background:linear-gradient(90deg, var(--saffron) 0%, #c9531a 40%, var(--saffron-light) 60%, #c9531a 80%, var(--saffron) 100%);
+  /* ===== BUTTONS ===== */
+  .btn-primary{
+    background:linear-gradient(90deg,var(--saffron) 0%,#c9531a 30%,var(--saffron-light) 50%,#c9531a 70%,var(--saffron) 100%);
     background-size:200% auto;
-    color:#fff;padding:9px 18px;border-radius:30px;font-weight:600;font-size:0.88rem;
-    box-shadow:0 4px 14px rgba(232,116,42,0.4);
-    animation:shine 2.5s linear infinite;
-    transition:transform .2s;
+    color:#fff;padding:16px 32px;border-radius:40px;font-weight:600;font-size:1rem;
+    display:inline-flex;align-items:center;gap:10px;
+    border:none;cursor:pointer;
+    animation:shine 2.5s linear infinite,pulse-btn 2s ease-in-out infinite;
+    transition:transform .25s;
   }
-  .nav-cta:hover{transform:scale(1.05);}
+  .btn-primary:hover{transform:translateY(-3px) scale(1.04);}
 
-  /* ========== HERO ========== */
+  .btn-ghost{
+    color:var(--gold-light);padding:16px 26px;border-radius:40px;font-weight:600;font-size:1rem;
+    border:1px solid rgba(205,160,74,0.5);display:inline-flex;align-items:center;gap:10px;
+    position:relative;overflow:hidden;background:transparent;
+  }
+  .btn-ghost::after{content:"";position:absolute;top:0;left:-75%;width:50%;height:100%;
+    background:linear-gradient(90deg,transparent,rgba(255,255,255,0.18),transparent);
+    animation:slideShine 2.2s linear infinite;}
+  .btn-ghost:hover{background:rgba(205,160,74,0.12);}
+
+  .modal-submit{
+    width:100%;
+    background:linear-gradient(90deg,#25D366 0%,#1aa84f 30%,#5eff99 50%,#1aa84f 70%,#25D366 100%);
+    background-size:200% auto;
+    color:#fff;padding:15px;border-radius:12px;border:none;font-size:1rem;font-weight:700;
+    display:flex;align-items:center;justify-content:center;gap:10px;cursor:pointer;margin-top:6px;
+    animation:shine 2.5s linear infinite;transition:transform .2s;
+  }
+  .modal-submit:hover{transform:translateY(-2px);}
+
+  /* ===== HERO ===== */
   .hero{
     position:relative;
-    padding:90px 0 80px;
+    padding:60px 0 80px;
     background:
-      radial-gradient(ellipse at top right, rgba(232,116,42,0.25), transparent 55%),
-      linear-gradient(160deg, var(--maroon-deep) 0%, var(--maroon) 55%, #6b1320 100%);
+      radial-gradient(ellipse at top right,rgba(232,116,42,0.25),transparent 55%),
+      linear-gradient(160deg,var(--maroon-deep) 0%,var(--maroon) 55%,#6b1320 100%);
     overflow:hidden;
   }
-  .hero::before{
-    content:"";position:absolute;inset:0;
-    background-image: repeating-linear-gradient(45deg, rgba(205,160,74,0.04) 0 2px, transparent 2px 40px);
-  }
+  .hero::before{content:"";position:absolute;inset:0;
+    background-image:repeating-linear-gradient(45deg,rgba(205,160,74,0.04) 0 2px,transparent 2px 40px);}
   .hero-mandala{
-    position:absolute; right:-120px; top:50%; transform:translateY(-50%);
-    width:560px; height:560px; border-radius:50%;
+    position:absolute;right:-120px;top:50%;transform:translateY(-50%);
+    width:560px;height:560px;border-radius:50%;
     border:1px dashed rgba(205,160,74,0.35);
-    animation: spin 60s linear infinite;
+    animation:spin 60s linear infinite;
   }
   .hero-mandala::before{content:"";position:absolute;inset:40px;border-radius:50%;border:1px dashed rgba(205,160,74,0.25);}
   .hero-mandala::after{content:"";position:absolute;inset:90px;border-radius:50%;border:1px dashed rgba(205,160,74,0.2);}
@@ -112,8 +104,7 @@
   .eyebrow{
     display:inline-flex;align-items:center;gap:8px;
     color:var(--gold-light);font-size:0.78rem;letter-spacing:0.16em;text-transform:uppercase;
-    border:1px solid rgba(205,160,74,0.4);padding:6px 14px;border-radius:30px;
-    margin-bottom:22px;
+    border:1px solid rgba(205,160,74,0.4);padding:6px 14px;border-radius:30px;margin-bottom:22px;
   }
   .hero h1{font-size:3.1rem;color:#fff;line-height:1.18;margin-bottom:16px;text-shadow:0 4px 24px rgba(0,0,0,0.3);}
   .hero h1 span{color:var(--saffron-light);}
@@ -121,52 +112,24 @@
   .hero p.desc{color:rgba(255,255,255,0.82);font-size:1.02rem;max-width:520px;margin-bottom:34px;line-height:1.7;}
   .hero-actions{display:flex;gap:16px;flex-wrap:wrap;}
 
-  /* ========== SHINING BUTTONS ========== */
-  .btn-primary{
-    background:linear-gradient(90deg, var(--saffron) 0%, #c9531a 30%, var(--saffron-light) 50%, #c9531a 70%, var(--saffron) 100%);
-    background-size:200% auto;
-    color:#fff;padding:16px 32px;border-radius:40px;font-weight:600;font-size:1rem;
-    display:inline-flex;align-items:center;gap:10px;
-    border:none;cursor:pointer;
-    animation:shine 2.5s linear infinite, pulse-btn 2s ease-in-out infinite;
-    transition:transform .25s;
-  }
-  .btn-primary:hover{transform:translateY(-3px) scale(1.04);}
-
-  .btn-ghost{
-    color:var(--gold-light);padding:16px 26px;border-radius:40px;font-weight:600;font-size:1rem;
-    border:1px solid rgba(205,160,74,0.5);display:inline-flex;align-items:center;gap:10px;
-    position:relative;overflow:hidden;transition:background .25s;
-    background:rgba(0,0,0,0);
-  }
-  .btn-ghost::after{
-    content:"";position:absolute;top:0;left:-75%;width:50%;height:100%;
-    background:linear-gradient(90deg, transparent, rgba(255,255,255,0.18), transparent);
-    animation:slideShine 2.2s linear infinite;
-  }
-  @keyframes slideShine{0%{left:-75%;}100%{left:130%;}}
-  .btn-ghost:hover{background:rgba(205,160,74,0.12);}
-
-  /* modal submit button */
-  .modal-submit{
-    width:100%;
-    background:linear-gradient(90deg, #25D366 0%, #1aa84f 30%, #5eff99 50%, #1aa84f 70%, #25D366 100%);
-    background-size:200% auto;
-    color:#fff;padding:15px;border-radius:12px;border:none;font-size:1rem;font-weight:700;
-    display:flex;align-items:center;justify-content:center;gap:10px;cursor:pointer;
-    margin-top:6px;
-    animation:shine 2.5s linear infinite;
-    transition:transform .2s;
-  }
-  .modal-submit:hover{transform:translateY(-2px);}
-
+  /* Portrait — NO crop, full image */
   .hero-portrait{position:relative;display:flex;justify-content:center;}
-  .portrait-ring{
-    position:relative;width:340px;height:420px;border-radius:50% 50% 46% 46% / 60% 60% 40% 40%;
-    overflow:hidden;border:4px solid var(--gold);
-    box-shadow:0 25px 60px rgba(0,0,0,0.45), 0 0 0 10px rgba(205,160,74,0.12);
+  .portrait-wrap{
+    position:relative;
+    display:inline-block;
+    border:4px solid var(--gold);
+    border-radius:24px;
+    box-shadow:0 25px 60px rgba(0,0,0,0.45),0 0 0 10px rgba(205,160,74,0.12);
+    overflow:hidden;
+    background:var(--maroon-deep);
   }
-  .portrait-ring img{width:100%;height:100%;object-fit:cover;}
+  .portrait-wrap img{
+    display:block;
+    width:100%;
+    max-width:340px;
+    height:auto;
+    object-fit:contain;
+  }
   .portrait-badge{
     position:absolute;bottom:-18px;left:50%;transform:translateX(-50%);
     background:var(--cream);color:var(--maroon);
@@ -180,25 +143,22 @@
   .trust-item{display:flex;align-items:center;gap:10px;color:var(--gold-light);font-size:0.88rem;}
   .trust-item i{color:var(--saffron-light);font-size:1.1rem;}
 
-  /* ========== SECTION TITLE ========== */
+  /* ===== SECTION HEAD ===== */
   .sec-head{text-align:center;max-width:680px;margin:0 auto 50px;}
   .sec-head .eyebrow{border-color:rgba(92,14,22,0.25);color:var(--maroon);}
   .sec-head h2{font-size:2.3rem;color:var(--maroon-deep);margin-bottom:14px;}
   .sec-head p{color:#5a4636;font-size:1.02rem;line-height:1.6;}
-
   section{padding:90px 0;position:relative;}
   .alt{background:linear-gradient(180deg,#fff,var(--cream));}
 
-  /* ========== ABOUT ========== */
+  /* ===== ABOUT ===== */
   .about-grid{display:grid;grid-template-columns:0.85fr 1.15fr;gap:60px;align-items:center;}
   .about-photo-wrap{position:relative;}
   .about-photo-wrap img{width:100%;border-radius:18px;box-shadow:0 20px 50px var(--shadow);border:3px solid var(--gold-light);}
-  .about-photo-wrap .om-chip{
-    position:absolute;top:-22px;left:-22px;width:70px;height:70px;border-radius:50%;
+  .about-photo-wrap .om-chip{position:absolute;top:-22px;left:-22px;width:70px;height:70px;border-radius:50%;
     background:linear-gradient(135deg,var(--saffron),var(--maroon));
     display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.6rem;
-    box-shadow:0 10px 24px rgba(0,0,0,0.3);
-  }
+    box-shadow:0 10px 24px rgba(0,0,0,0.3);}
   .about-text h2{font-size:2.1rem;color:var(--maroon-deep);margin-bottom:8px;}
   .about-text .role{color:var(--saffron);font-weight:600;margin-bottom:18px;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.2rem;}
   .about-text p{color:#5a4636;line-height:1.8;margin-bottom:18px;font-size:1.02rem;}
@@ -206,40 +166,36 @@
   .about-point{display:flex;gap:10px;align-items:flex-start;color:#3d2a1c;font-size:0.94rem;}
   .about-point i{color:var(--saffron);margin-top:3px;}
 
-  /* ========== SERVICES ========== */
+  /* ===== SERVICES ===== */
   .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;}
-  .service-card{
-    background:#fff;border-radius:16px;padding:32px 26px;
-    border:1px solid rgba(205,160,74,0.3);
-    box-shadow:0 10px 30px rgba(92,14,22,0.06);
-    transition:transform .3s, box-shadow .3s;
-  }
+  .service-card{background:#fff;border-radius:16px;padding:32px 26px;border:1px solid rgba(205,160,74,0.3);
+    box-shadow:0 10px 30px rgba(92,14,22,0.06);transition:transform .3s,box-shadow .3s;}
   .service-card:hover{transform:translateY(-8px);box-shadow:0 18px 40px rgba(92,14,22,0.14);}
-  .service-icon{
-    width:58px;height:58px;border-radius:14px;
+  .service-icon{width:58px;height:58px;border-radius:14px;
     background:linear-gradient(135deg,var(--saffron-light),var(--saffron));
-    display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.5rem;
-    margin-bottom:18px;
-  }
+    display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.5rem;margin-bottom:18px;}
   .service-card h3{font-size:1.2rem;color:var(--maroon-deep);margin-bottom:10px;font-family:'Mukta',sans-serif;font-weight:700;}
   .service-card p{color:#6b5848;font-size:0.93rem;line-height:1.65;}
 
-  /* ========== GALLERY ========== */
+  /* ===== GALLERY ===== */
   .gallery-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;}
   .gallery-grid figure{margin:0;border-radius:14px;overflow:hidden;position:relative;border:2px solid var(--gold-light);aspect-ratio:3/4;box-shadow:0 12px 26px rgba(92,14,22,0.12);}
   .gallery-grid img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s;}
   .gallery-grid figure:hover img{transform:scale(1.08);}
-  .gallery-grid figcaption{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(0deg, rgba(61,10,16,0.85), transparent);color:var(--gold-light);font-size:0.8rem;padding:18px 12px 10px;font-weight:600;}
+  .gallery-grid figcaption{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(0deg,rgba(61,10,16,0.85),transparent);color:var(--gold-light);font-size:0.8rem;padding:18px 12px 10px;font-weight:600;}
 
-  /* ========== PROCESS ========== */
+  /* ===== PROCESS ===== */
   .process-wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative;}
-  .process-wrap::before{content:"";position:absolute;top:34px;left:8%;right:8%;height:2px;background:repeating-linear-gradient(90deg, var(--gold) 0 10px, transparent 10px 20px);}
+  .process-wrap::before{content:"";position:absolute;top:34px;left:8%;right:8%;height:2px;
+    background:repeating-linear-gradient(90deg,var(--gold) 0 10px,transparent 10px 20px);}
   .process-step{text-align:center;padding:0 16px;position:relative;z-index:1;}
-  .process-num{width:68px;height:68px;border-radius:50%;background:var(--maroon-deep);color:var(--gold-light);display:flex;align-items:center;justify-content:center;font-family:'Yeseva One',serif;font-size:1.3rem;margin:0 auto 18px;border:3px solid var(--gold);box-shadow:0 8px 20px rgba(92,14,22,0.25);}
+  .process-num{width:68px;height:68px;border-radius:50%;background:var(--maroon-deep);color:var(--gold-light);
+    display:flex;align-items:center;justify-content:center;font-family:'Yeseva One',serif;font-size:1.3rem;
+    margin:0 auto 18px;border:3px solid var(--gold);box-shadow:0 8px 20px rgba(92,14,22,0.25);}
   .process-step h3{font-size:1.05rem;color:var(--maroon-deep);margin-bottom:8px;}
   .process-step p{font-size:0.88rem;color:#6b5848;}
 
-  /* ========== TESTIMONIALS ========== */
+  /* ===== TESTIMONIALS ===== */
   .test-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
   .test-card{background:linear-gradient(160deg,#fff,var(--cream));border-radius:16px;padding:28px;border:1px solid rgba(205,160,74,0.3);box-shadow:0 10px 26px rgba(92,14,22,0.06);}
   .test-stars{color:var(--saffron);margin-bottom:14px;font-size:0.9rem;}
@@ -247,52 +203,42 @@
   .test-who{display:flex;align-items:center;gap:10px;font-weight:700;color:var(--maroon-deep);font-size:0.9rem;}
   .test-who i{color:var(--saffron);}
 
-  /* ========== CONTACT BAND ========== */
-  .contact-band{
-    background:linear-gradient(135deg, var(--maroon-deep), var(--maroon));
+  /* ===== CONTACT BAND ===== */
+  .contact-band{background:linear-gradient(135deg,var(--maroon-deep),var(--maroon));
     border-radius:28px;padding:60px;display:grid;grid-template-columns:1.2fr 0.8fr;gap:40px;align-items:center;
-    box-shadow:0 30px 60px rgba(61,10,16,0.35);
-    position:relative;overflow:hidden;
-  }
-  .contact-band::after{content:"";position:absolute;right:-60px;top:-60px;width:240px;height:240px;border-radius:50%;background:radial-gradient(circle, rgba(232,116,42,0.3), transparent 70%);}
+    box-shadow:0 30px 60px rgba(61,10,16,0.35);position:relative;overflow:hidden;}
+  .contact-band::after{content:"";position:absolute;right:-60px;top:-60px;width:240px;height:240px;border-radius:50%;
+    background:radial-gradient(circle,rgba(232,116,42,0.3),transparent 70%);}
   .contact-text h2{color:#fff;font-size:2rem;margin-bottom:14px;}
   .contact-text p{color:rgba(255,255,255,0.82);font-size:1rem;line-height:1.7;margin-bottom:26px;}
   .contact-actions{display:flex;gap:16px;flex-wrap:wrap;}
-  .contact-side{background:rgba(255,255,255,0.08);border:1px solid rgba(205,160,74,0.4);border-radius:18px;padding:26px;color:var(--gold-light);}
+  .contact-side{background:rgba(255,255,255,0.08);border:1px solid rgba(205,160,74,0.4);border-radius:18px;padding:26px;}
   .contact-side .row{display:flex;align-items:center;gap:12px;margin-bottom:16px;font-size:0.95rem;color:#fff;}
   .contact-side .row i{color:var(--saffron-light);width:22px;text-align:center;font-size:1.1rem;}
   .contact-side .row:last-child{margin-bottom:0;}
 
-  /* ========== FOOTER ========== */
+  /* ===== FOOTER ===== */
   footer{background:var(--maroon-deep);color:var(--gold-light);padding:40px 0 26px;text-align:center;}
-  footer .brand{justify-content:center;margin-bottom:14px;}
+  footer .brand{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:14px;}
   footer p{font-size:0.82rem;color:rgba(236,211,160,0.65);}
   .footer-links{display:flex;justify-content:center;gap:20px;margin:16px 0;font-size:0.9rem;}
+  .footer-links a{color:var(--gold-light);}
 
-  /* ========== MOBILE BOTTOM NAV ========== */
+  /* ===== FLOATING WHATSAPP (desktop) ===== */
+  .wa-float{position:fixed;bottom:26px;right:26px;z-index:999;width:60px;height:60px;border-radius:50%;
+    background:#25D366;color:#fff;display:flex;align-items:center;justify-content:center;
+    font-size:1.7rem;box-shadow:0 10px 26px rgba(0,0,0,0.3);animation:pulseWa 2.4s infinite;}
+  @keyframes pulseWa{0%{box-shadow:0 0 0 0 rgba(37,211,102,0.55);}70%{box-shadow:0 0 0 16px rgba(37,211,102,0);}100%{box-shadow:0 0 0 0 rgba(37,211,102,0);}}
+
+  /* ===== MOBILE BOTTOM NAV ===== */
   .mobile-bottom-nav{display:none;}
 
-  /* ========== FLOATING WHATSAPP ========== */
-  .wa-float{
-    position:fixed;bottom:26px;right:26px;z-index:999;
-    width:60px;height:60px;border-radius:50%;
-    background:#25D366;color:#fff;display:flex;align-items:center;justify-content:center;
-    font-size:1.7rem;box-shadow:0 10px 26px rgba(0,0,0,0.3);
-    animation:pulseWa 2.4s infinite;
-  }
-  @keyframes pulseWa{
-    0%{box-shadow:0 0 0 0 rgba(37,211,102,0.55);}
-    70%{box-shadow:0 0 0 16px rgba(37,211,102,0);}
-    100%{box-shadow:0 0 0 0 rgba(37,211,102,0);}
-  }
-
-  /* ========== MODAL ========== */
+  /* ===== MODAL ===== */
   .modal-overlay{position:fixed;inset:0;background:rgba(20,5,7,0.72);display:none;align-items:center;justify-content:center;z-index:2000;padding:20px;}
   .modal-overlay.active{display:flex;}
   .modal-box{background:var(--cream);border-radius:22px;max-width:420px;width:100%;padding:40px 34px 34px;position:relative;border:3px solid var(--gold);box-shadow:0 30px 70px rgba(0,0,0,0.5);animation:popIn .35s ease;}
   @keyframes popIn{from{transform:scale(0.85);opacity:0;}to{transform:scale(1);opacity:1;}}
-  .modal-close{position:absolute;top:16px;right:16px;width:34px;height:34px;border-radius:50%;background:rgba(92,14,22,0.08);border:none;color:var(--maroon-deep);font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s;}
-  .modal-close:hover{background:rgba(92,14,22,0.16);}
+  .modal-close{position:absolute;top:16px;right:16px;width:34px;height:34px;border-radius:50%;background:rgba(92,14,22,0.08);border:none;color:var(--maroon-deep);font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;}
   .modal-box h3{font-size:1.5rem;color:var(--maroon-deep);margin-bottom:6px;text-align:center;}
   .modal-box .sub{text-align:center;color:#6b5848;font-size:0.9rem;margin-bottom:26px;}
   .form-group{margin-bottom:18px;}
@@ -301,9 +247,8 @@
   .form-group input:focus{outline:none;border-color:var(--saffron);}
   .form-note{text-align:center;font-size:0.78rem;color:#8a7766;margin-top:14px;}
 
-  /* ========== RESPONSIVE ========== */
-  @media (max-width:980px){
-    nav ul{display:none;}
+  /* ===== RESPONSIVE ===== */
+  @media(max-width:980px){
     .hero-grid{grid-template-columns:1fr;text-align:center;}
     .hero p.desc{margin:0 auto 34px;}
     .hero-actions{justify-content:center;}
@@ -317,105 +262,86 @@
     .contact-band{grid-template-columns:1fr;padding:40px 26px;}
   }
 
-  @media (max-width:680px){
-    /* Show mobile bottom nav, hide floating WA */
+  @media(max-width:680px){
+    /* Hide desktop floating WA, show bottom nav */
     .wa-float{display:none;}
+
+    body{padding-bottom:64px;}
+
     .mobile-bottom-nav{
       display:flex;
       position:fixed;bottom:0;left:0;right:0;z-index:1100;
       background:var(--maroon-deep);
       border-top:2px solid var(--gold);
-      height:64px;
-      align-items:stretch;
+      height:64px;align-items:stretch;
     }
     .mob-nav-item{
       flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
-      gap:3px;color:var(--gold-light);font-size:0.6rem;font-weight:600;text-transform:uppercase;
-      letter-spacing:0.04em;padding:6px 4px;border:none;background:transparent;cursor:pointer;
-      transition:background .2s;text-decoration:none;
+      gap:3px;font-size:0.58rem;font-weight:600;text-transform:uppercase;letter-spacing:0.04em;
+      padding:6px 2px;border:none;background:transparent;cursor:pointer;text-decoration:none;
+      transition:background .2s;
     }
-    .mob-nav-item:hover, .mob-nav-item:active{background:rgba(205,160,74,0.12);}
     .mob-nav-item i{font-size:1.15rem;}
-    /* Consultation button in bottom nav — special shining */
+
+    /* Each button = its own section colour */
+    /* Guru Ji — maroon/gold */
+    .mob-nav-guru{color:var(--gold-light);}
+    .mob-nav-guru:hover{background:rgba(205,160,74,0.1);}
+
+    /* Services — saffron */
+    .mob-nav-services{color:var(--saffron-light);}
+    .mob-nav-services:hover{background:rgba(232,116,42,0.12);}
+
+    /* Consult — saffron/orange solid */
     .mob-nav-consult{
-      background:linear-gradient(90deg, var(--saffron) 0%, #c9531a 30%, var(--saffron-light) 50%, #c9531a 70%, var(--saffron) 100%);
-      background-size:200% auto;
-      color:#fff !important;
-      animation:shine 2.2s linear infinite;
+      background:linear-gradient(160deg,var(--saffron),#c9531a);
+      color:#fff;border-radius:0;
     }
-    .mob-nav-wa{
-      background:linear-gradient(90deg, #1ea852 0%, #25D366 40%, #5dffa0 55%, #25D366 70%, #1ea852 100%);
-      background-size:200% auto;
-      color:#fff !important;
-      animation:shine 2.2s linear infinite;
-    }
+    .mob-nav-consult:hover{background:linear-gradient(160deg,#c9531a,var(--saffron));}
 
-    /* Body padding for fixed bottom nav */
-    body{padding-bottom:64px;}
+    /* WhatsApp — green */
+    .mob-nav-wa{background:#25D366;color:#fff;border-radius:0;}
+    .mob-nav-wa:hover{background:#1ea852;}
 
-    /* Hero: photo on TOP for mobile */
-    .hero{padding:80px 0 60px;}
+    /* Gallery — gold */
+    .mob-nav-gallery{color:var(--gold);}
+    .mob-nav-gallery:hover{background:rgba(205,160,74,0.1);}
+
+    /* Hero mobile: photo on top, no crop */
+    .hero{padding:30px 0 60px;}
     .hero-grid{
-      display:flex;flex-direction:column;
-      gap:24px;padding:0 18px;
+      display:flex;flex-direction:column;gap:20px;padding:0 16px;
     }
-    /* Move portrait before text content */
-    .hero-portrait{order:-1;margin-bottom:0;}
-    .portrait-ring{width:200px;height:250px;}
-    .portrait-badge{font-size:0.75rem;padding:8px 16px;}
+    .hero-portrait{order:-1;}
+    .portrait-wrap{max-width:260px;margin:0 auto;}
+    .portrait-wrap img{max-width:260px;}
+    .portrait-badge{font-size:0.7rem;padding:7px 14px;bottom:-14px;}
 
-    .hero h1{font-size:1.9rem;}
-    .hero .tagline{font-size:1.1rem;}
-    .hero p.desc{font-size:0.95rem;}
-
-    .services-grid{grid-template-columns:1fr;}
-    .gallery-grid{grid-template-columns:1fr 1fr;}
-    .about-points{grid-template-columns:1fr;}
-    .contact-band{padding:28px 18px;}
-    section{padding:60px 0;}
-
-    /* Buttons full-width on mobile */
+    .hero h1{font-size:1.85rem;}
+    .hero .tagline{font-size:1.05rem;}
+    .hero p.desc{font-size:0.94rem;}
     .hero-actions{flex-direction:column;align-items:center;}
-    .btn-primary, .btn-ghost{width:100%;justify-content:center;}
+    .btn-primary,.btn-ghost{width:100%;justify-content:center;}
+
+    section{padding:55px 0;}
+    .services-grid{grid-template-columns:1fr;}
+    .about-points{grid-template-columns:1fr;}
+    .contact-band{padding:26px 16px;}
   }
 
-  @media (prefers-reduced-motion: reduce){
-    *{animation:none !important; transition:none !important;}
-  }
-  :focus-visible{outline:3px solid var(--saffron); outline-offset:2px;}
+  @media(prefers-reduced-motion:reduce){*{animation:none !important;transition:none !important;}}
+  :focus-visible{outline:3px solid var(--saffron);outline-offset:2px;}
 </style>
 </head>
 <body>
 <div class="om-bg"></div>
 
-<!-- ===== HEADER ===== -->
-<header>
-  <div class="nav-wrap">
-    <div class="brand">
-      <img src="https://i.ibb.co/X6FQ3X9/IMG-20260628-WA0010.jpg" alt="Ravikant Tantrik Ji">
-      <div class="brand-text">
-        <div class="name">Ravikant Tantrik Ji</div>
-        <div class="sub">Vedic Jyotish &amp; Tantrik Guru</div>
-      </div>
-    </div>
-    <nav>
-      <ul>
-        <li><a href="#about">Guru Ji</a></li>
-        <li><a href="#services">Services</a></li>
-        <li><a href="#gallery">Gallery</a></li>
-        <li><a href="#process">Process</a></li>
-        <li><a href="#testimonials">Reviews</a></li>
-      </ul>
-    </nav>
-    <a href="#" class="nav-cta" onclick="openModal();return false;"><i class="fa-solid fa-calendar-check"></i> Consultation</a>
-  </div>
-</header>
+<!-- NO HEADER — removed as requested -->
 
 <!-- ===== HERO ===== -->
 <section class="hero">
   <div class="hero-mandala"></div>
   <div class="hero-grid">
-    <!-- On desktop: text left, photo right. On mobile: photo top (via CSS order) -->
     <div>
       <div class="eyebrow"><i class="fa-solid fa-om"></i> 25+ Saal Ka Anubhav</div>
       <h1>Apki Zindagi Ki Har Samasya Ka <span>Vedic Samadhan</span></h1>
@@ -432,8 +358,8 @@
       </div>
     </div>
     <div class="hero-portrait">
-      <div class="portrait-ring">
-        <img src="https://i.ibb.co/X6FQ3X9/IMG-20260628-WA0010.jpg" alt="Ravikant Tantrik Ji Portrait">
+      <div class="portrait-wrap">
+        <img src="https://i.ibb.co/X6FQ3X9/IMG-20260628-WA0010.jpg" alt="Guru Ravikant Tantrik Ji">
       </div>
       <div class="portrait-badge"><i class="fa-solid fa-om"></i> Guru Ravikant Tantrik Ji</div>
     </div>
@@ -471,36 +397,12 @@
       <p>Apke jeevan ki har samasya ke liye shastra-sammat aur vyaktigat margdarshan.</p>
     </div>
     <div class="services-grid">
-      <div class="service-card">
-        <div class="service-icon"><i class="fa-solid fa-scroll"></i></div>
-        <h3>Kundli Vishleshan</h3>
-        <p>Janma kundli ka vistrit adhyayan karke graho ki sthiti aur unka jeevan par prabhav samjhaya jaata hai.</p>
-      </div>
-      <div class="service-card">
-        <div class="service-icon"><i class="fa-solid fa-heart"></i></div>
-        <h3>Vivah &amp; Prem Samasya</h3>
-        <p>Vivah mein aa rahi badhaon aur prem sambandhi uljhanon ke liye sahi aur sachha margdarshan.</p>
-      </div>
-      <div class="service-card">
-        <div class="service-icon"><i class="fa-solid fa-briefcase"></i></div>
-        <h3>Career &amp; Vyapar</h3>
-        <p>Naukri, business aur dhan-laabh se judi samasyaon ka jyotish-aadharit vishleshan aur salah.</p>
-      </div>
-      <div class="service-card">
-        <div class="service-icon"><i class="fa-solid fa-house"></i></div>
-        <h3>Vastu Shastra</h3>
-        <p>Ghar aur office mein vastu dosh ki pehchaan karke saral upayon se sukh-shanti laane ka margdarshan.</p>
-      </div>
-      <div class="service-card">
-        <div class="service-icon"><i class="fa-solid fa-hand-sparkles"></i></div>
-        <h3>Tantrik Pooja Sadhna</h3>
-        <p>Vidhi-vidhan se tantrik pooja aur sadhna, shastron ki paramparaon ke anusaar sampann karwana.</p>
-      </div>
-      <div class="service-card">
-        <div class="service-icon"><i class="fa-solid fa-gem"></i></div>
-        <h3>Ratna &amp; Upaye Salah</h3>
-        <p>Janma kundli ke aadhar par sahi ratna, rudraksha aur upayon ki sahi salah.</p>
-      </div>
+      <div class="service-card"><div class="service-icon"><i class="fa-solid fa-scroll"></i></div><h3>Kundli Vishleshan</h3><p>Janma kundli ka vistrit adhyayan karke graho ki sthiti aur unka jeevan par prabhav samjhaya jaata hai.</p></div>
+      <div class="service-card"><div class="service-icon"><i class="fa-solid fa-heart"></i></div><h3>Vivah &amp; Prem Samasya</h3><p>Vivah mein aa rahi badhaon aur prem sambandhi uljhanon ke liye sahi aur sachha margdarshan.</p></div>
+      <div class="service-card"><div class="service-icon"><i class="fa-solid fa-briefcase"></i></div><h3>Career &amp; Vyapar</h3><p>Naukri, business aur dhan-laabh se judi samasyaon ka jyotish-aadharit vishleshan aur salah.</p></div>
+      <div class="service-card"><div class="service-icon"><i class="fa-solid fa-house"></i></div><h3>Vastu Shastra</h3><p>Ghar aur office mein vastu dosh ki pehchaan karke saral upayon se sukh-shanti laane ka margdarshan.</p></div>
+      <div class="service-card"><div class="service-icon"><i class="fa-solid fa-hand-sparkles"></i></div><h3>Tantrik Pooja Sadhna</h3><p>Vidhi-vidhan se tantrik pooja aur sadhna, shastron ki paramparaon ke anusaar sampann karwana.</p></div>
+      <div class="service-card"><div class="service-icon"><i class="fa-solid fa-gem"></i></div><h3>Ratna &amp; Upaye Salah</h3><p>Janma kundli ke aadhar par sahi ratna, rudraksha aur upayon ki sahi salah.</p></div>
     </div>
   </div>
 </section>
@@ -514,22 +416,10 @@
       <p>Guru ji ki pooja, sadhna aur jajmano ke saath kuch pal.</p>
     </div>
     <div class="gallery-grid">
-      <figure>
-        <img src="https://i.ibb.co/G42820qd/IMG-20260626-WA0061.jpg" alt="Pooja Vidhi">
-        <figcaption>Pooja Vidhi</figcaption>
-      </figure>
-      <figure>
-        <img src="https://i.ibb.co/xKgdKFCn/IMG-20260626-WA0060.jpg" alt="Tantrik Sadhna">
-        <figcaption>Tantrik Sadhna</figcaption>
-      </figure>
-      <figure>
-        <img src="https://i.ibb.co/ds1DYN6N/IMG-20260628-WA0023.jpg" alt="Ashram Darshan">
-        <figcaption>Ashram Darshan</figcaption>
-      </figure>
-      <figure>
-        <img src="https://i.ibb.co/HpYXGrwc/IMG-20260628-WA0022.jpg" alt="Guru Ji Aashirwad">
-        <figcaption>Guru Ji Aashirwad</figcaption>
-      </figure>
+      <figure><img src="https://i.ibb.co/G42820qd/IMG-20260626-WA0061.jpg" alt="Pooja Vidhi"><figcaption>Pooja Vidhi</figcaption></figure>
+      <figure><img src="https://i.ibb.co/xKgdKFCn/IMG-20260626-WA0060.jpg" alt="Tantrik Sadhna"><figcaption>Tantrik Sadhna</figcaption></figure>
+      <figure><img src="https://i.ibb.co/ds1DYN6N/IMG-20260628-WA0023.jpg" alt="Ashram Darshan"><figcaption>Ashram Darshan</figcaption></figure>
+      <figure><img src="https://i.ibb.co/HpYXGrwc/IMG-20260628-WA0022.jpg" alt="Guru Ji Aashirwad"><figcaption>Guru Ji Aashirwad</figcaption></figure>
     </div>
   </div>
 </section>
@@ -543,26 +433,10 @@
       <p>Sirf 4 saral charno mein guru ji se margdarshan paayein.</p>
     </div>
     <div class="process-wrap">
-      <div class="process-step">
-        <div class="process-num">1</div>
-        <h3>Fill Form</h3>
-        <p>Apna naam, age aur mobile number form mein darj karein.</p>
-      </div>
-      <div class="process-step">
-        <div class="process-num">2</div>
-        <h3>WhatsApp Connect</h3>
-        <p>Aapki jankari seedhe guru ji ke WhatsApp par pahunch jaayegi.</p>
-      </div>
-      <div class="process-step">
-        <div class="process-num">3</div>
-        <h3>Share Problem</h3>
-        <p>Guru ji aapse baat karke aapki samasya ko shaant se samjhenge.</p>
-      </div>
-      <div class="process-step">
-        <div class="process-num">4</div>
-        <h3>Get Guidance</h3>
-        <p>Aapko vyaktigat aur shastra-sammat salah di jaayegi.</p>
-      </div>
+      <div class="process-step"><div class="process-num">1</div><h3>Fill Form</h3><p>Apna naam, age aur mobile number form mein darj karein.</p></div>
+      <div class="process-step"><div class="process-num">2</div><h3>WhatsApp Connect</h3><p>Aapki jankari seedhe guru ji ke WhatsApp par pahunch jaayegi.</p></div>
+      <div class="process-step"><div class="process-num">3</div><h3>Share Problem</h3><p>Guru ji aapse baat karke aapki samasya ko shaant se samjhenge.</p></div>
+      <div class="process-step"><div class="process-num">4</div><h3>Get Guidance</h3><p>Aapko vyaktigat aur shastra-sammat salah di jaayegi.</p></div>
     </div>
   </div>
 </section>
@@ -576,21 +450,9 @@
       <p>Hamare saath jude jajmano ke kuch anubhav.</p>
     </div>
     <div class="test-grid">
-      <div class="test-card">
-        <div class="test-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-        <p>Guru ji se baat karke mujhe apni samasya ko samajhne mein bahut madad mili. Bahut shaant aur saaf tareeke se sab samjhaya.</p>
-        <div class="test-who"><i class="fa-solid fa-circle-user"></i> Rakesh, Delhi</div>
-      </div>
-      <div class="test-card">
-        <div class="test-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-        <p>Vastu salah lene ke baad ghar ka mahaul kaafi behtar laga. Guru ji ka margdarshan bahut sachha tha.</p>
-        <div class="test-who"><i class="fa-solid fa-circle-user"></i> Sunita, Jaipur</div>
-      </div>
-      <div class="test-card">
-        <div class="test-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-        <p>Kundli dikhane ke baad guru ji ne bahut dhyan se meri career ki uljhan suni aur sahi raah dikhayi.</p>
-        <div class="test-who"><i class="fa-solid fa-circle-user"></i> Manoj, Lucknow</div>
-      </div>
+      <div class="test-card"><div class="test-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div><p>Guru ji se baat karke mujhe apni samasya ko samajhne mein bahut madad mili. Bahut shaant aur saaf tareeke se sab samjhaya.</p><div class="test-who"><i class="fa-solid fa-circle-user"></i> Rakesh, Delhi</div></div>
+      <div class="test-card"><div class="test-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div><p>Vastu salah lene ke baad ghar ka mahaul kaafi behtar laga. Guru ji ka margdarshan bahut sachha tha.</p><div class="test-who"><i class="fa-solid fa-circle-user"></i> Sunita, Jaipur</div></div>
+      <div class="test-card"><div class="test-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div><p>Kundli dikhane ke baad guru ji ne bahut dhyan se meri career ki uljhan suni aur sahi raah dikhayi.</p><div class="test-who"><i class="fa-solid fa-circle-user"></i> Manoj, Lucknow</div></div>
     </div>
   </div>
 </section>
@@ -609,7 +471,7 @@
       </div>
       <div class="contact-side">
         <div class="row"><i class="fa-brands fa-whatsapp"></i> +91 79733 28909</div>
-        <div class="row"><i class="fa-solid fa-clock"></i> Daily 7:00 AM - 10:00 PM</div>
+        <div class="row"><i class="fa-solid fa-clock"></i> Daily 7:00 AM – 10:00 PM</div>
         <div class="row"><i class="fa-solid fa-lock"></i> 100% Confidential</div>
         <div class="row"><i class="fa-solid fa-om"></i> Guru Ravikant Tantrik Ji</div>
       </div>
@@ -621,9 +483,9 @@
 <footer>
   <div class="container">
     <div class="brand">
-      <img src="https://i.ibb.co/X6FQ3X9/IMG-20260628-WA0010.jpg" alt="Ravikant Tantrik Ji" style="width:40px;height:40px;">
+      <img src="https://i.ibb.co/X6FQ3X9/IMG-20260628-WA0010.jpg" alt="Ravikant Tantrik Ji" style="width:40px;height:40px;border-radius:50%;border:2px solid var(--gold);object-fit:cover;">
       <div class="brand-text" style="text-align:left;">
-        <div class="name">Ravikant Tantrik Ji</div>
+        <div class="name" style="font-family:'Yeseva One',serif;font-size:1rem;color:#fff;">Ravikant Tantrik Ji</div>
       </div>
     </div>
     <div class="footer-links">
@@ -636,54 +498,40 @@
   </div>
 </footer>
 
-<!-- ===== FLOATING WHATSAPP (desktop only) ===== -->
-<a class="wa-float" href="https://wa.me/917973328909" target="_blank" rel="noopener" aria-label="WhatsApp par sampark karein">
+<!-- Floating WA — desktop only -->
+<a class="wa-float" href="https://wa.me/917973328909" target="_blank" rel="noopener" aria-label="WhatsApp">
   <i class="fa-brands fa-whatsapp"></i>
 </a>
 
-<!-- ===== MOBILE BOTTOM FIXED NAV ===== -->
+<!-- ===== MOBILE FIXED BOTTOM NAV ===== -->
 <nav class="mobile-bottom-nav" aria-label="Mobile navigation">
-  <a href="#about" class="mob-nav-item">
-    <i class="fa-solid fa-om"></i>
-    <span>Guru Ji</span>
+  <a href="#about" class="mob-nav-item mob-nav-guru">
+    <i class="fa-solid fa-om"></i><span>Guru Ji</span>
   </a>
-  <a href="#services" class="mob-nav-item">
-    <i class="fa-solid fa-scroll"></i>
-    <span>Services</span>
+  <a href="#services" class="mob-nav-item mob-nav-services">
+    <i class="fa-solid fa-scroll"></i><span>Services</span>
   </a>
   <button class="mob-nav-item mob-nav-consult" onclick="openModal()">
-    <i class="fa-solid fa-calendar-check"></i>
-    <span>Consult</span>
+    <i class="fa-solid fa-calendar-check"></i><span>Consult</span>
   </button>
   <a href="https://wa.me/917973328909" target="_blank" rel="noopener" class="mob-nav-item mob-nav-wa">
-    <i class="fa-brands fa-whatsapp"></i>
-    <span>WhatsApp</span>
+    <i class="fa-brands fa-whatsapp"></i><span>WhatsApp</span>
   </a>
-  <a href="#gallery" class="mob-nav-item">
-    <i class="fa-solid fa-images"></i>
-    <span>Gallery</span>
+  <a href="#gallery" class="mob-nav-item mob-nav-gallery">
+    <i class="fa-solid fa-images"></i><span>Gallery</span>
   </a>
 </nav>
 
-<!-- ===== MODAL FORM ===== -->
+<!-- ===== MODAL ===== -->
 <div class="modal-overlay" id="modalOverlay">
   <div class="modal-box">
     <button class="modal-close" onclick="closeModal()" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
     <h3><i class="fa-solid fa-om" style="color:var(--saffron);"></i> Free Consultation</h3>
     <p class="sub">Fill your details, we will contact you on WhatsApp</p>
     <form id="consultForm">
-      <div class="form-group">
-        <label for="fname">Full Name</label>
-        <input type="text" id="fname" placeholder="Enter your name" required>
-      </div>
-      <div class="form-group">
-        <label for="fage">Age</label>
-        <input type="number" id="fage" placeholder="Enter your age" min="1" max="120" required>
-      </div>
-      <div class="form-group">
-        <label for="fmobile">Mobile Number</label>
-        <input type="tel" id="fmobile" placeholder="10 digit mobile number" pattern="[0-9]{10}" maxlength="10" required>
-      </div>
+      <div class="form-group"><label for="fname">Full Name</label><input type="text" id="fname" placeholder="Enter your name" required></div>
+      <div class="form-group"><label for="fage">Age</label><input type="number" id="fage" placeholder="Enter your age" min="1" max="120" required></div>
+      <div class="form-group"><label for="fmobile">Mobile Number</label><input type="tel" id="fmobile" placeholder="10 digit mobile number" pattern="[0-9]{10}" maxlength="10" required></div>
       <button type="submit" class="modal-submit"><i class="fa-brands fa-whatsapp"></i> Send on WhatsApp</button>
       <p class="form-note">Your details will go directly to Guru Ji's WhatsApp after submitting.</p>
     </form>
@@ -691,36 +539,19 @@
 </div>
 
 <script>
-  function openModal(){
-    document.getElementById('modalOverlay').classList.add('active');
-    document.body.style.overflow='hidden';
-  }
-  function closeModal(){
-    document.getElementById('modalOverlay').classList.remove('active');
-    document.body.style.overflow='';
-  }
-  document.getElementById('modalOverlay').addEventListener('click', function(e){
-    if(e.target === this){ closeModal(); }
-  });
-  document.addEventListener('keydown', function(e){
-    if(e.key === 'Escape'){ closeModal(); }
-  });
-
-  document.getElementById('consultForm').addEventListener('submit', function(e){
+  function openModal(){document.getElementById('modalOverlay').classList.add('active');document.body.style.overflow='hidden';}
+  function closeModal(){document.getElementById('modalOverlay').classList.remove('active');document.body.style.overflow='';}
+  document.getElementById('modalOverlay').addEventListener('click',function(e){if(e.target===this)closeModal();});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')closeModal();});
+  document.getElementById('consultForm').addEventListener('submit',function(e){
     e.preventDefault();
-    var name = document.getElementById('fname').value.trim();
-    var age = document.getElementById('fage').value.trim();
-    var mobile = document.getElementById('fmobile').value.trim();
-    var message = "Namaste Guru Ji, mujhe consultation chahiye.\n" +
-                  "Naam: " + name + "\n" +
-                  "Umar: " + age + "\n" +
-                  "Mobile: " + mobile;
-    var whatsappURL = "https://wa.me/917973328909?text=" + encodeURIComponent(message);
-    window.open(whatsappURL, "_blank");
-    closeModal();
-    this.reset();
+    var name=document.getElementById('fname').value.trim();
+    var age=document.getElementById('fage').value.trim();
+    var mobile=document.getElementById('fmobile').value.trim();
+    var msg="Namaste Guru Ji, mujhe consultation chahiye.\nNaam: "+name+"\nUmar: "+age+"\nMobile: "+mobile;
+    window.open("https://wa.me/917973328909?text="+encodeURIComponent(msg),"_blank");
+    closeModal();this.reset();
   });
 </script>
-
 </body>
 </html>
