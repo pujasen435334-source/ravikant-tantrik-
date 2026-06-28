@@ -86,6 +86,24 @@
   }
   .hero::before{content:"";position:absolute;inset:0;
     background-image:repeating-linear-gradient(45deg,rgba(205,160,74,0.04) 0 2px,transparent 2px 40px);}
+
+  /* Om floating icons */
+  .om-icon{
+    position:absolute;color:rgba(205,160,74,0.13);
+    font-family:'Yeseva One',serif;font-size:5rem;pointer-events:none;user-select:none;
+    animation:omFloat 8s ease-in-out infinite;
+  }
+  .om-icon:nth-child(1){top:8%;left:4%;font-size:4rem;animation-delay:0s;animation-duration:7s;}
+  .om-icon:nth-child(2){top:60%;left:6%;font-size:6rem;animation-delay:1.5s;animation-duration:9s;}
+  .om-icon:nth-child(3){top:20%;left:48%;font-size:3.5rem;animation-delay:3s;animation-duration:8s;}
+  .om-icon:nth-child(4){top:72%;left:55%;font-size:7rem;animation-delay:0.8s;animation-duration:11s;}
+  .om-icon:nth-child(5){top:5%;left:78%;font-size:5rem;animation-delay:2s;animation-duration:10s;}
+  .om-icon:nth-child(6){top:50%;left:82%;font-size:4rem;animation-delay:4s;animation-duration:7.5s;}
+  @keyframes omFloat{
+    0%,100%{transform:translateY(0) rotate(-6deg);opacity:0.10;}
+    50%{transform:translateY(-22px) rotate(6deg);opacity:0.22;}
+  }
+
   .hero-mandala{
     position:absolute;right:-120px;top:50%;transform:translateY(-50%);
     width:560px;height:560px;border-radius:50%;
@@ -116,10 +134,10 @@
   .hero-portrait{position:relative;display:flex;justify-content:center;}
   .portrait-wrap{
     position:relative;
-    width:320px;height:320px;
+    width:380px;height:380px;
     border-radius:50%;
     border:5px solid var(--gold);
-    box-shadow:0 0 0 12px rgba(205,160,74,0.18),0 25px 60px rgba(0,0,0,0.5);
+    box-shadow:0 0 0 14px rgba(205,160,74,0.18),0 25px 60px rgba(0,0,0,0.5);
     overflow:hidden;
     background:var(--maroon-deep);
     flex-shrink:0;
@@ -306,29 +324,12 @@
     }
     .mob-nav-item i{font-size:1.15rem;}
 
-    /* Each button = its own section colour */
-    /* Guru Ji — maroon/gold */
-    .mob-nav-guru{color:var(--gold-light);}
-    .mob-nav-guru:hover{background:rgba(205,160,74,0.1);}
-
-    /* Services — saffron */
-    .mob-nav-services{color:var(--saffron-light);}
-    .mob-nav-services:hover{background:rgba(232,116,42,0.12);}
-
-    /* Consult — saffron/orange solid */
-    .mob-nav-consult{
-      background:linear-gradient(160deg,var(--saffron),#c9531a);
-      color:#fff;border-radius:0;
+    /* All mob nav items same color — maroon bg, gold text */
+    .mob-nav-guru,.mob-nav-services,.mob-nav-consult,.mob-nav-wa,.mob-nav-gallery{
+      color:var(--gold-light);
+      background:transparent;
     }
-    .mob-nav-consult:hover{background:linear-gradient(160deg,#c9531a,var(--saffron));}
-
-    /* WhatsApp — green */
-    .mob-nav-wa{background:#25D366;color:#fff;border-radius:0;}
-    .mob-nav-wa:hover{background:#1ea852;}
-
-    /* Gallery — gold */
-    .mob-nav-gallery{color:var(--gold);}
-    .mob-nav-gallery:hover{background:rgba(205,160,74,0.1);}
+    .mob-nav-item:hover,.mob-nav-item:active{background:rgba(205,160,74,0.1);}
 
     /* Hero mobile: photo on top, circle */
     .hero{padding:30px 0 60px;}
@@ -336,7 +337,7 @@
       display:flex;flex-direction:column;gap:20px;padding:0 16px;
     }
     .hero-portrait{order:-1;}
-    .portrait-wrap{width:200px;height:200px;margin:0 auto;}
+    .portrait-wrap{width:240px;height:240px;margin:0 auto;}
     .portrait-badge{font-size:0.7rem;padding:7px 14px;bottom:-14px;}
 
     .hero h1{font-size:1.85rem;}
@@ -370,6 +371,13 @@
 
 <!-- ===== HERO ===== -->
 <section class="hero">
+  <!-- Animated Om icons -->
+  <span class="om-icon">ॐ</span>
+  <span class="om-icon">ॐ</span>
+  <span class="om-icon">ॐ</span>
+  <span class="om-icon">ॐ</span>
+  <span class="om-icon">ॐ</span>
+  <span class="om-icon">ॐ</span>
   <div class="hero-mandala"></div>
   <div class="hero-grid">
     <div>
@@ -582,6 +590,8 @@
     window.open("https://wa.me/917973328909?text="+encodeURIComponent(msg),"_blank");
     closeModal();this.reset();
   });
+  // Auto open popup after 3 seconds
+  setTimeout(function(){openModal();},3000);
 </script>
 </body>
 </html>
