@@ -36,7 +36,6 @@
   a{text-decoration:none;color:inherit;}
   .container{max-width:1180px;margin:0 auto;padding:0 24px;}
 
-  /* ===== ANIMATIONS ===== */
   @keyframes shine{0%{background-position:-200% center;}100%{background-position:200% center;}}
   @keyframes omFloat{0%,100%{transform:translateY(0) rotate(-6deg);opacity:0.10;}50%{transform:translateY(-22px) rotate(6deg);opacity:0.22;}}
   @keyframes spin{from{transform:translateY(-50%) rotate(0deg);}to{transform:translateY(-50%) rotate(360deg);}}
@@ -44,7 +43,6 @@
   @keyframes pulseWa{0%{box-shadow:0 0 0 0 rgba(37,211,102,0.55);}70%{box-shadow:0 0 0 16px rgba(37,211,102,0);}100%{box-shadow:0 0 0 0 rgba(37,211,102,0);}}
   @keyframes pulseCall{0%{box-shadow:0 0 0 0 rgba(232,116,42,0.6);}70%{box-shadow:0 0 0 14px rgba(232,116,42,0);}100%{box-shadow:0 0 0 0 rgba(232,116,42,0);}}
 
-  /* ===== BUTTONS — NO shine ===== */
   .btn-primary{
     background:linear-gradient(90deg,var(--saffron) 0%,#c9531a 50%,var(--saffron) 100%);
     color:#fff;padding:16px 32px;border-radius:40px;font-weight:600;font-size:1rem;
@@ -66,7 +64,6 @@
   }
   .modal-submit:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(37,211,102,0.55);}
 
-  /* ===== HERO ===== */
   .hero{
     position:relative;padding:60px 0 80px;
     background:radial-gradient(ellipse at top right,rgba(232,116,42,0.25),transparent 55%),
@@ -101,7 +98,6 @@
   .trust-item{display:flex;align-items:center;gap:10px;color:var(--gold-light);font-size:0.88rem;}
   .trust-item i{color:var(--saffron-light);font-size:1.1rem;}
 
-  /* ===== SECTION HEAD ===== */
   .sec-head{text-align:center;max-width:680px;margin:0 auto 50px;}
   .sec-head .eyebrow{border-color:rgba(92,14,22,0.25);color:var(--maroon);}
   .sec-head h2{font-size:2.3rem;color:var(--maroon-deep);margin-bottom:14px;}
@@ -109,7 +105,6 @@
   section{padding:90px 0;position:relative;}
   .alt{background:linear-gradient(180deg,#fff,var(--cream));}
 
-  /* ===== ABOUT ===== */
   .about-grid{display:grid;grid-template-columns:0.85fr 1.15fr;gap:60px;align-items:center;}
   .about-photo-wrap{position:relative;}
   .about-photo-wrap img{width:100%;border-radius:18px;box-shadow:0 20px 50px var(--shadow);border:3px solid var(--gold-light);}
@@ -121,112 +116,76 @@
   .about-point{display:flex;gap:10px;align-items:flex-start;color:#3d2a1c;font-size:0.94rem;}
   .about-point i{color:var(--saffron);margin-top:3px;}
 
-  /* ===== SERVICES ===== */
+  /* ===== SERVICES — FULL IMAGE FIX ===== */
   .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;}
-  .service-card{background:#fff;border-radius:20px;overflow:hidden;border:1px solid rgba(205,160,74,0.25);box-shadow:0 12px 36px rgba(92,14,22,0.08);transition:transform .35s,box-shadow .35s;position:relative;}
+  .service-card{
+    background:#fff;border-radius:20px;overflow:hidden;
+    border:1px solid rgba(205,160,74,0.25);
+    box-shadow:0 12px 36px rgba(92,14,22,0.08);
+    transition:transform .35s,box-shadow .35s;
+    position:relative;
+    display:flex;flex-direction:column;
+  }
   .service-card:hover{transform:translateY(-10px);box-shadow:0 24px 50px rgba(92,14,22,0.18);}
-  .service-img{width:100%;height:180px;overflow:hidden;position:relative;}
-  .service-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s;display:block;}
-  .service-card:hover .service-img img{transform:scale(1.08);}
-  .service-img-overlay{position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(61,10,16,0.7) 100%);}
+
+  /* Image shows fully — no crop, no height clamp */
+  .service-img{
+    width:100%;
+    position:relative;
+    overflow:hidden;
+    background:#f5ece0;
+    flex-shrink:0;
+  }
+  .service-img img{
+    display:block;
+    width:100%;
+    height:auto;        /* FULL image, no crop */
+    object-fit:unset;
+    transition:transform .5s;
+  }
+  .service-card:hover .service-img img{transform:scale(1.04);}
+  .service-img-overlay{position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(61,10,16,0.55) 100%);pointer-events:none;}
   .service-badge{position:absolute;top:12px;left:12px;background:linear-gradient(135deg,var(--saffron),#c9531a);color:#fff;border-radius:30px;padding:5px 12px;font-size:0.72rem;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;display:flex;align-items:center;gap:6px;}
-  .service-body{padding:22px 22px 24px;}
+  .service-body{padding:22px 22px 24px;flex:1;display:flex;flex-direction:column;}
   .service-card h3{font-size:1.15rem;color:var(--maroon-deep);margin-bottom:8px;font-family:'Mukta',sans-serif;font-weight:700;}
-  .service-card p{color:#6b5848;font-size:0.92rem;line-height:1.65;}
+  .service-card p{color:#6b5848;font-size:0.92rem;line-height:1.65;flex:1;}
   .service-link{display:inline-flex;align-items:center;gap:6px;margin-top:14px;color:var(--saffron);font-weight:600;font-size:0.88rem;cursor:pointer;border:none;background:none;padding:0;}
   .service-link i{font-size:0.8rem;transition:transform .2s;}
   .service-card:hover .service-link i{transform:translateX(4px);}
 
-  /* ===== GALLERY ===== */
   .gallery-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;}
   .gallery-grid figure{margin:0;border-radius:14px;overflow:hidden;position:relative;border:2px solid var(--gold-light);aspect-ratio:3/4;box-shadow:0 12px 26px rgba(92,14,22,0.12);}
   .gallery-grid img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s;}
   .gallery-grid figure:hover img{transform:scale(1.08);}
   .gallery-grid figcaption{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(0deg,rgba(61,10,16,0.85),transparent);color:var(--gold-light);font-size:0.8rem;padding:18px 12px 10px;font-weight:600;}
 
-  /* ===== TESTIMONIALS SLIDER ===== */
   .slider-outer{position:relative;overflow:hidden;padding:10px 0 50px;}
-  .slider-track{
-    display:flex;
-    gap:24px;
-    transition:transform 0.6s cubic-bezier(.25,.46,.45,.94);
-    will-change:transform;
-  }
-  .test-card{
-    background:linear-gradient(160deg,#fff,var(--cream));
-    border-radius:20px;padding:32px 28px;
-    border:1px solid rgba(205,160,74,0.3);
-    box-shadow:0 10px 30px rgba(92,14,22,0.08);
-    min-width:360px;max-width:360px;
-    flex-shrink:0;
-    position:relative;
-  }
-  .test-card::before{
-    content:"\201C";
-    position:absolute;top:16px;right:22px;
-    font-family:'Cormorant Garamond',serif;
-    font-size:5rem;line-height:1;
-    color:rgba(205,160,74,0.18);
-    pointer-events:none;
-  }
+  .slider-track{display:flex;gap:24px;transition:transform 0.6s cubic-bezier(.25,.46,.45,.94);will-change:transform;}
+  .test-card{background:linear-gradient(160deg,#fff,var(--cream));border-radius:20px;padding:32px 28px;border:1px solid rgba(205,160,74,0.3);box-shadow:0 10px 30px rgba(92,14,22,0.08);min-width:360px;max-width:360px;flex-shrink:0;position:relative;}
+  .test-card::before{content:"\201C";position:absolute;top:16px;right:22px;font-family:'Cormorant Garamond',serif;font-size:5rem;line-height:1;color:rgba(205,160,74,0.18);pointer-events:none;}
   .test-stars{color:var(--saffron);margin-bottom:14px;font-size:1rem;letter-spacing:2px;}
   .test-card p{color:#5a4636;font-size:0.96rem;line-height:1.7;margin-bottom:20px;}
   .test-who{display:flex;align-items:center;gap:10px;font-weight:700;color:var(--maroon-deep);font-size:0.9rem;}
   .test-who-avatar{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--saffron),var(--maroon));display:flex;align-items:center;justify-content:center;color:#fff;font-size:0.9rem;flex-shrink:0;}
   .test-who-info small{display:block;font-weight:400;color:#8a7766;font-size:0.78rem;margin-top:2px;}
-
-  /* Slider dots */
   .slider-dots{display:flex;justify-content:center;gap:8px;margin-top:20px;}
   .slider-dot{width:8px;height:8px;border-radius:50%;background:rgba(92,14,22,0.2);border:none;cursor:pointer;padding:0;transition:all .3s;}
   .slider-dot.active{width:28px;border-radius:4px;background:var(--saffron);}
-
-  /* Slider arrows */
-  .slider-arrow{
-    position:absolute;top:50%;transform:translateY(-60%);
-    width:44px;height:44px;border-radius:50%;
-    background:#fff;border:2px solid rgba(205,160,74,0.4);
-    color:var(--maroon);font-size:1rem;cursor:pointer;
-    display:flex;align-items:center;justify-content:center;
-    box-shadow:0 6px 18px rgba(92,14,22,0.12);
-    transition:all .2s;z-index:10;
-  }
+  .slider-arrow{position:absolute;top:50%;transform:translateY(-60%);width:44px;height:44px;border-radius:50%;background:#fff;border:2px solid rgba(205,160,74,0.4);color:var(--maroon);font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 18px rgba(92,14,22,0.12);transition:all .2s;z-index:10;}
   .slider-arrow:hover{background:var(--saffron);color:#fff;border-color:var(--saffron);}
   .slider-prev{left:0;}
   .slider-next{right:0;}
 
-  /* ===== FAQ ===== */
   .faq-list{max-width:800px;margin:0 auto;display:flex;flex-direction:column;gap:16px;}
-  .faq-item{
-    background:#fff;border-radius:16px;
-    border:1px solid rgba(205,160,74,0.25);
-    box-shadow:0 6px 20px rgba(92,14,22,0.06);
-    overflow:hidden;
-  }
-  .faq-q{
-    width:100%;display:flex;align-items:center;justify-content:space-between;gap:16px;
-    padding:22px 26px;background:none;border:none;cursor:pointer;
-    font-family:'Mukta',sans-serif;font-size:1.05rem;font-weight:700;
-    color:var(--maroon-deep);text-align:left;
-    transition:background .2s;
-  }
+  .faq-item{background:#fff;border-radius:16px;border:1px solid rgba(205,160,74,0.25);box-shadow:0 6px 20px rgba(92,14,22,0.06);overflow:hidden;}
+  .faq-q{width:100%;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:22px 26px;background:none;border:none;cursor:pointer;font-family:'Mukta',sans-serif;font-size:1.05rem;font-weight:700;color:var(--maroon-deep);text-align:left;transition:background .2s;}
   .faq-q:hover{background:rgba(205,160,74,0.06);}
-  .faq-icon{
-    width:34px;height:34px;border-radius:50%;flex-shrink:0;
-    background:linear-gradient(135deg,var(--saffron),#c9531a);
-    color:#fff;display:flex;align-items:center;justify-content:center;
-    font-size:0.85rem;transition:transform .35s;
-  }
+  .faq-icon{width:34px;height:34px;border-radius:50%;flex-shrink:0;background:linear-gradient(135deg,var(--saffron),#c9531a);color:#fff;display:flex;align-items:center;justify-content:center;font-size:0.85rem;transition:transform .35s;}
   .faq-item.open .faq-icon{transform:rotate(45deg);}
-  .faq-a{
-    max-height:0;overflow:hidden;
-    transition:max-height .4s ease,padding .3s;
-    padding:0 26px;
-    color:#6b5848;font-size:0.96rem;line-height:1.75;
-  }
+  .faq-a{max-height:0;overflow:hidden;transition:max-height .4s ease,padding .3s;padding:0 26px;color:#6b5848;font-size:0.96rem;line-height:1.75;}
   .faq-item.open .faq-a{max-height:300px;padding:0 26px 22px;}
   .faq-a-inner{border-top:1px solid rgba(205,160,74,0.2);padding-top:16px;}
 
-  /* ===== CONTACT BAND ===== */
   .contact-band{background:linear-gradient(135deg,var(--maroon-deep),var(--maroon));border-radius:28px;padding:60px;display:grid;grid-template-columns:1.2fr 0.8fr;gap:40px;align-items:center;box-shadow:0 30px 60px rgba(61,10,16,0.35);position:relative;overflow:hidden;}
   .contact-band::after{content:"";position:absolute;right:-60px;top:-60px;width:240px;height:240px;border-radius:50%;background:radial-gradient(circle,rgba(232,116,42,0.3),transparent 70%);}
   .contact-text h2{color:#fff;font-size:2rem;margin-bottom:14px;}
@@ -237,29 +196,24 @@
   .contact-side .row i{color:var(--saffron-light);width:22px;text-align:center;font-size:1.1rem;}
   .contact-side .row:last-child{margin-bottom:0;}
 
-  /* ===== FOOTER ===== */
   footer{background:var(--maroon-deep);color:var(--gold-light);padding:40px 0 26px;text-align:center;}
   footer .brand{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:14px;}
   footer p{font-size:0.82rem;color:rgba(236,211,160,0.65);}
   .footer-links{display:flex;justify-content:center;gap:20px;margin:16px 0;font-size:0.9rem;}
   .footer-links a{color:var(--gold-light);}
 
-  /* ===== FLOATING BUTTONS (PC + Mobile) ===== */
   .float-btns{position:fixed;bottom:26px;right:26px;z-index:999;display:flex;flex-direction:column;gap:12px;align-items:center;}
   .float-call-btn{width:60px;height:60px;border-radius:50%;background:#e8742a;color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.5rem;box-shadow:0 8px 22px rgba(232,116,42,0.55);text-decoration:none;animation:pulseCall 2.2s infinite;}
   .float-wa-btn{width:60px;height:60px;border-radius:50%;background:#25D366;color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.7rem;box-shadow:0 10px 26px rgba(0,0,0,0.25);animation:pulseWa 2.4s infinite;text-decoration:none;}
 
-  /* ===== ANNOUNCEMENT BAR ===== */
   .announce-bar{position:fixed;top:0;left:0;right:0;z-index:1200;background:linear-gradient(90deg,var(--maroon-deep) 0%,var(--maroon) 40%,#8b1a27 60%,var(--maroon) 100%);background-size:200% auto;animation:shine 4s linear infinite;color:var(--gold-light);font-size:0.82rem;font-weight:600;padding:9px 16px;display:flex;align-items:center;justify-content:center;gap:10px;border-bottom:1px solid rgba(205,160,74,0.4);text-align:center;letter-spacing:0.02em;}
   .announce-bar i{color:var(--saffron-light);}
   .announce-bar a{color:var(--gold-light);text-decoration:underline;text-underline-offset:3px;}
   .announce-bar .close-bar{position:absolute;right:14px;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--gold-light);cursor:pointer;font-size:1rem;opacity:0.7;padding:2px 6px;}
   .announce-bar .close-bar:hover{opacity:1;}
 
-  /* ===== MOBILE BOTTOM NAV ===== */
   .mobile-bottom-nav{display:none;}
 
-  /* ===== MODAL ===== */
   .modal-overlay{position:fixed;inset:0;background:rgba(20,5,7,0.72);display:none;align-items:center;justify-content:center;z-index:2000;padding:20px;}
   .modal-overlay.active{display:flex;}
   .modal-box{background:var(--cream);border-radius:22px;max-width:420px;width:100%;padding:40px 34px 34px;position:relative;border:3px solid var(--gold);box-shadow:0 30px 70px rgba(0,0,0,0.5);animation:popIn .35s ease;}
@@ -288,11 +242,21 @@
 
   @media(max-width:680px){
     body{padding-bottom:64px;}
-    .services-grid{grid-template-columns:repeat(2,1fr);gap:14px;}
-    .service-img{height:130px;}
-    .service-body{padding:14px 14px 16px;}
-    .service-card h3{font-size:1rem;}
-    .service-card p{font-size:0.82rem;}
+
+    /* ===== MOBILE: Services = 1 column ===== */
+    .services-grid{
+      grid-template-columns:1fr !important;
+      gap:20px;
+    }
+    /* Image full natural height on mobile too */
+    .service-img img{
+      width:100%;
+      height:auto;
+    }
+    .service-body{padding:18px 18px 20px;}
+    .service-card h3{font-size:1.05rem;}
+    .service-card p{font-size:0.9rem;}
+
     .gallery-grid{grid-template-columns:repeat(2,1fr);gap:12px;}
     .test-card{min-width:calc(100vw - 60px);max-width:calc(100vw - 60px);}
     .float-btns{bottom:80px;right:14px;gap:10px;}
@@ -329,7 +293,6 @@
 <body>
 <div class="om-bg"></div>
 
-<!-- ANNOUNCEMENT BAR -->
 <div class="announce-bar" id="announceBar">
   <i class="fa-solid fa-star"></i>
   <span>🕉️ Abhi Free Consultation Lein — Pehli Salah Bilkul Muft! &nbsp;|&nbsp; <a href="https://wa.me/917973328909" target="_blank">WhatsApp: +91 79733 28909</a></span>
@@ -337,7 +300,6 @@
   <button class="close-bar" onclick="document.getElementById('announceBar').style.display='none';document.body.style.paddingTop='0';" aria-label="Close">✕</button>
 </div>
 
-<!-- HERO -->
 <section class="hero">
   <span class="om-icon">ॐ</span><span class="om-icon">ॐ</span><span class="om-icon">ॐ</span>
   <span class="om-icon">ॐ</span><span class="om-icon">ॐ</span><span class="om-icon">ॐ</span>
@@ -367,7 +329,6 @@
   </div>
 </section>
 
-<!-- ABOUT -->
 <section id="about">
   <div class="container about-grid">
     <div class="about-photo-wrap">
@@ -389,7 +350,6 @@
   </div>
 </section>
 
-<!-- SERVICES -->
 <section id="services" class="alt">
   <div class="container">
     <div class="sec-head">
@@ -426,7 +386,6 @@
   </div>
 </section>
 
-<!-- GALLERY -->
 <section id="gallery">
   <div class="container">
     <div class="sec-head">
@@ -443,7 +402,6 @@
   </div>
 </section>
 
-<!-- TESTIMONIALS SLIDER -->
 <section id="testimonials" class="alt">
   <div class="container">
     <div class="sec-head">
@@ -455,52 +413,31 @@
       <button class="slider-arrow slider-prev" id="sliderPrev" aria-label="Previous"><i class="fa-solid fa-chevron-left"></i></button>
       <div class="slider-outer" id="sliderOuter">
         <div class="slider-track" id="sliderTrack">
-
           <div class="test-card">
             <div class="test-stars">★★★★★</div>
             <p>Guru ji se baat karke mujhe apni samasya ko samajhne mein bahut madad mili. Bahut shaant aur saaf tareeke se sab samjhaya. Unka margdarshan mere jeevan mein sachchi roshni ban gaya.</p>
-            <div class="test-who">
-              <div class="test-who-avatar"><i class="fa-solid fa-user"></i></div>
-              <div class="test-who-info">Rakesh Sharma<small>Delhi</small></div>
-            </div>
+            <div class="test-who"><div class="test-who-avatar"><i class="fa-solid fa-user"></i></div><div class="test-who-info">Rakesh Sharma<small>Delhi</small></div></div>
           </div>
-
           <div class="test-card">
             <div class="test-stars">★★★★★</div>
             <p>Vastu salah lene ke baad ghar ka mahaul kaafi behtar laga. Guru ji ka margdarshan bahut sachha tha aur unhone ghar ki choti choti cheezein notice karke sahi salah di.</p>
-            <div class="test-who">
-              <div class="test-who-avatar"><i class="fa-solid fa-user"></i></div>
-              <div class="test-who-info">Sunita Devi<small>Jaipur</small></div>
-            </div>
+            <div class="test-who"><div class="test-who-avatar"><i class="fa-solid fa-user"></i></div><div class="test-who-info">Sunita Devi<small>Jaipur</small></div></div>
           </div>
-
           <div class="test-card">
             <div class="test-stars">★★★★★</div>
             <p>Kundli dikhane ke baad guru ji ne bahut dhyan se meri career ki uljhan suni aur sahi raah dikhayi. Aaj main uss salah ki wajah se apni zindagi mein kaafi aage badh gaya hoon.</p>
-            <div class="test-who">
-              <div class="test-who-avatar"><i class="fa-solid fa-user"></i></div>
-              <div class="test-who-info">Manoj Gupta<small>Lucknow</small></div>
-            </div>
+            <div class="test-who"><div class="test-who-avatar"><i class="fa-solid fa-user"></i></div><div class="test-who-info">Manoj Gupta<small>Lucknow</small></div></div>
           </div>
-
           <div class="test-card">
             <div class="test-stars">★★★★★</div>
             <p>Mere vivah mein kai saalo se badha aa rahi thi. Guru ji se milne ke baad unhone jo upay bataye, unhe karne ke ek mahine baad hi rishta pakka ho gaya. Bahut shukriya Guru ji!</p>
-            <div class="test-who">
-              <div class="test-who-avatar"><i class="fa-solid fa-user"></i></div>
-              <div class="test-who-info">Priya Singh<small>Agra</small></div>
-            </div>
+            <div class="test-who"><div class="test-who-avatar"><i class="fa-solid fa-user"></i></div><div class="test-who-info">Priya Singh<small>Agra</small></div></div>
           </div>
-
           <div class="test-card">
             <div class="test-stars">★★★★★</div>
             <p>Business mein kaafi nuksan ho raha tha, lagta tha sab khatam ho jaayega. Guru ji ne kundli dekhi, vastu aur ratna ke upay bataye. Aaj hamare business mein phir se barkat aa gayi hai.</p>
-            <div class="test-who">
-              <div class="test-who-avatar"><i class="fa-solid fa-user"></i></div>
-              <div class="test-who-info">Vijay Agarwal<small>Kanpur</small></div>
-            </div>
+            <div class="test-who"><div class="test-who-avatar"><i class="fa-solid fa-user"></i></div><div class="test-who-info">Vijay Agarwal<small>Kanpur</small></div></div>
           </div>
-
         </div>
       </div>
       <button class="slider-arrow slider-next" id="sliderNext" aria-label="Next"><i class="fa-solid fa-chevron-right"></i></button>
@@ -509,7 +446,6 @@
   </div>
 </section>
 
-<!-- FAQ -->
 <section id="faq">
   <div class="container">
     <div class="sec-head">
@@ -518,52 +454,26 @@
       <p>Guru ji se judne se pehle logon ke mann mein aane wale sawaalon ke jawaab.</p>
     </div>
     <div class="faq-list">
-
       <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)">
-          <span>Kya pehli consultation sach mein muft hai?</span>
-          <div class="faq-icon"><i class="fa-solid fa-plus"></i></div>
-        </button>
-        <div class="faq-a">
-          <div class="faq-a-inner">Haan, bilkul muft hai. Aapki pehli salah ke liye koi charge nahi liya jaata. Guru Ravikant Tantrik Ji har naye jajman ko pehle muft mein sunta hai, unki samasya samajhta hai aur phir aage ka margdarshan deta hai. Koi chhupa kharcha nahi.</div>
-        </div>
+        <button class="faq-q" onclick="toggleFaq(this)"><span>Kya pehli consultation sach mein muft hai?</span><div class="faq-icon"><i class="fa-solid fa-plus"></i></div></button>
+        <div class="faq-a"><div class="faq-a-inner">Haan, bilkul muft hai. Aapki pehli salah ke liye koi charge nahi liya jaata. Guru Ravikant Tantrik Ji har naye jajman ko pehle muft mein sunta hai, unki samasya samajhta hai aur phir aage ka margdarshan deta hai. Koi chhupa kharcha nahi.</div></div>
       </div>
-
       <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)">
-          <span>Kya meri baat poori tarah gupt rahegi?</span>
-          <div class="faq-icon"><i class="fa-solid fa-plus"></i></div>
-        </button>
-        <div class="faq-a">
-          <div class="faq-a-inner">Aapki privacy hamari sabse badi zimmedaari hai. Guru ji se jo bhi baat hoti hai woh 100% gupt rehti hai. Aapki kundli, samasya ya vyaktigat baatein kabhi kisi ke saath share nahi ki jaati. Aap nishchint hokar apni baat khul ke kar sakte hain.</div>
-        </div>
+        <button class="faq-q" onclick="toggleFaq(this)"><span>Kya meri baat poori tarah gupt rahegi?</span><div class="faq-icon"><i class="fa-solid fa-plus"></i></div></button>
+        <div class="faq-a"><div class="faq-a-inner">Aapki privacy hamari sabse badi zimmedaari hai. Guru ji se jo bhi baat hoti hai woh 100% gupt rehti hai. Aapki kundli, samasya ya vyaktigat baatein kabhi kisi ke saath share nahi ki jaati. Aap nishchint hokar apni baat khul ke kar sakte hain.</div></div>
       </div>
-
       <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)">
-          <span>Consultation ke liye kya WhatsApp par baat ho sakti hai?</span>
-          <div class="faq-icon"><i class="fa-solid fa-plus"></i></div>
-        </button>
-        <div class="faq-a">
-          <div class="faq-a-inner">Haan, bilkul! Guru ji WhatsApp par poori tarah upalabdh hain. Aap text, voice message ya call ke zariye baat kar sakte hain. Form bharne ke baad Guru ji khud aapse WhatsApp par sampark karenge. Kahin aane ki zaroorat nahi — ghar baithe salah milti hai.</div>
-        </div>
+        <button class="faq-q" onclick="toggleFaq(this)"><span>Consultation ke liye kya WhatsApp par baat ho sakti hai?</span><div class="faq-icon"><i class="fa-solid fa-plus"></i></div></button>
+        <div class="faq-a"><div class="faq-a-inner">Haan, bilkul! Guru ji WhatsApp par poori tarah upalabdh hain. Aap text, voice message ya call ke zariye baat kar sakte hain. Form bharne ke baad Guru ji khud aapse WhatsApp par sampark karenge. Kahin aane ki zaroorat nahi — ghar baithe salah milti hai.</div></div>
       </div>
-
       <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)">
-          <span>Upay karne mein kitna waqt lagta hai aur kya result milta hai?</span>
-          <div class="faq-icon"><i class="fa-solid fa-plus"></i></div>
-        </button>
-        <div class="faq-a">
-          <div class="faq-a-inner">Har vyakti ki samasya aur uski kundli ke hisaab se waqt alag hota hai. Kuch upay 7-21 din mein asar dikhate hain jabke kuch ko 40-90 din lagte hain. Guru ji sirf wahi upay batate hain jo shastra-sammat aur vyaktigat kundli ke hisaab se sahi hon — koi generic formula nahi diya jaata.</div>
-        </div>
+        <button class="faq-q" onclick="toggleFaq(this)"><span>Upay karne mein kitna waqt lagta hai aur kya result milta hai?</span><div class="faq-icon"><i class="fa-solid fa-plus"></i></div></button>
+        <div class="faq-a"><div class="faq-a-inner">Har vyakti ki samasya aur uski kundli ke hisaab se waqt alag hota hai. Kuch upay 7-21 din mein asar dikhate hain jabke kuch ko 40-90 din lagte hain. Guru ji sirf wahi upay batate hain jo shastra-sammat aur vyaktigat kundli ke hisaab se sahi hon — koi generic formula nahi diya jaata.</div></div>
       </div>
-
     </div>
   </div>
 </section>
 
-<!-- CONTACT -->
 <section class="alt">
   <div class="container">
     <div class="contact-band">
@@ -585,7 +495,6 @@
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
   <div class="container">
     <div class="brand">
@@ -605,13 +514,11 @@
   </div>
 </footer>
 
-<!-- FLOATING BUTTONS (PC + Mobile) -->
 <div class="float-btns">
   <a class="float-call-btn" href="tel:+917973328909" aria-label="Call Guru Ji"><i class="fa-solid fa-phone"></i></a>
   <a class="float-wa-btn" href="https://wa.me/917973328909" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
 </div>
 
-<!-- MOBILE BOTTOM NAV -->
 <nav class="mobile-bottom-nav" aria-label="Mobile navigation">
   <a href="#about" class="mob-nav-item"><i class="fa-solid fa-om"></i><span>Guru Ji</span></a>
   <a href="#services" class="mob-nav-item"><i class="fa-solid fa-scroll"></i><span>Services</span></a>
@@ -620,7 +527,6 @@
   <a href="#gallery" class="mob-nav-item"><i class="fa-solid fa-images"></i><span>Gallery</span></a>
 </nav>
 
-<!-- MODAL -->
 <div class="modal-overlay" id="modalOverlay">
   <div class="modal-box">
     <button class="modal-close" onclick="closeModal()" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
@@ -637,7 +543,6 @@
 </div>
 
 <script>
-  /* ===== MODAL ===== */
   function openModal(){document.getElementById('modalOverlay').classList.add('active');document.body.style.overflow='hidden';}
   function closeModal(){document.getElementById('modalOverlay').classList.remove('active');document.body.style.overflow='';}
   document.getElementById('modalOverlay').addEventListener('click',function(e){if(e.target===this)closeModal();});
@@ -653,7 +558,6 @@
   });
   setTimeout(function(){openModal();},3000);
 
-  /* ===== SLIDER ===== */
   (function(){
     var track = document.getElementById('sliderTrack');
     var dotsContainer = document.getElementById('sliderDots');
@@ -661,7 +565,6 @@
     var total = cards.length;
     var current = 0;
     var autoTimer;
-    var cardW = 0;
     var gap = 24;
     var visibleCount = 1;
 
@@ -672,7 +575,6 @@
       return cards[0].offsetWidth;
     }
 
-    // Build dots
     function buildDots(){
       dotsContainer.innerHTML='';
       var pages = total - visibleCount + 1;
@@ -692,7 +594,7 @@
     }
 
     function goTo(idx){
-      cardW = getCardWidth();
+      var cardW = getCardWidth();
       var pages = total - visibleCount + 1;
       if(pages<1) pages=1;
       current = Math.max(0, Math.min(idx, pages-1));
@@ -700,14 +602,8 @@
       updateDots();
     }
 
-    function next(){
-      var pages = total - visibleCount + 1;
-      goTo(current+1 >= pages ? 0 : current+1);
-    }
-    function prev(){
-      var pages = total - visibleCount + 1;
-      goTo(current-1 < 0 ? pages-1 : current-1);
-    }
+    function next(){var pages=total-visibleCount+1;goTo(current+1>=pages?0:current+1);}
+    function prev(){var pages=total-visibleCount+1;goTo(current-1<0?pages-1:current-1);}
 
     function startAuto(){ autoTimer = setInterval(next, 3500); }
     function stopAuto(){ clearInterval(autoTimer); }
@@ -715,7 +611,6 @@
     document.getElementById('sliderNext').addEventListener('click',function(){stopAuto();next();startAuto();});
     document.getElementById('sliderPrev').addEventListener('click',function(){stopAuto();prev();startAuto();});
 
-    // Touch/swipe
     var touchStartX=0;
     track.addEventListener('touchstart',function(e){touchStartX=e.touches[0].clientX;stopAuto();},{passive:true});
     track.addEventListener('touchend',function(e){
@@ -725,20 +620,16 @@
     });
 
     window.addEventListener('resize',function(){buildDots();goTo(0);});
-
     buildDots();
     startAuto();
   })();
 
-  /* ===== FAQ ===== */
   function toggleFaq(btn){
     var item = btn.parentElement;
     var isOpen = item.classList.contains('open');
-    // close all
     document.querySelectorAll('.faq-item.open').forEach(function(el){el.classList.remove('open');});
     if(!isOpen) item.classList.add('open');
   }
 </script>
 </body>
 </html>
- 
