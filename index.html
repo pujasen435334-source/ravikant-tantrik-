@@ -26,7 +26,7 @@
     background:var(--cream);
     color:var(--ink);
     overflow-x:hidden;
-    padding-top:0; /* NO header */
+    padding-top:40px; /* announcement bar height */
   }
   h1,h2,h3,.display{font-family:'Yeseva One',serif;}
   .accent-script{font-family:'Cormorant Garamond',serif;font-style:italic;}
@@ -112,23 +112,23 @@
   .hero p.desc{color:rgba(255,255,255,0.82);font-size:1.02rem;max-width:520px;margin-bottom:34px;line-height:1.7;}
   .hero-actions{display:flex;gap:16px;flex-wrap:wrap;}
 
-  /* Portrait — NO crop, full image */
+  /* Portrait — circle shape */
   .hero-portrait{position:relative;display:flex;justify-content:center;}
   .portrait-wrap{
     position:relative;
-    display:inline-block;
-    border:4px solid var(--gold);
-    border-radius:24px;
-    box-shadow:0 25px 60px rgba(0,0,0,0.45),0 0 0 10px rgba(205,160,74,0.12);
+    width:320px;height:320px;
+    border-radius:50%;
+    border:5px solid var(--gold);
+    box-shadow:0 0 0 12px rgba(205,160,74,0.18),0 25px 60px rgba(0,0,0,0.5);
     overflow:hidden;
     background:var(--maroon-deep);
+    flex-shrink:0;
   }
   .portrait-wrap img{
     display:block;
-    width:100%;
-    max-width:340px;
-    height:auto;
-    object-fit:contain;
+    width:100%;height:100%;
+    object-fit:cover;
+    object-position:top center;
   }
   .portrait-badge{
     position:absolute;bottom:-18px;left:50%;transform:translateX(-50%);
@@ -230,6 +230,29 @@
     font-size:1.7rem;box-shadow:0 10px 26px rgba(0,0,0,0.3);animation:pulseWa 2.4s infinite;}
   @keyframes pulseWa{0%{box-shadow:0 0 0 0 rgba(37,211,102,0.55);}70%{box-shadow:0 0 0 16px rgba(37,211,102,0);}100%{box-shadow:0 0 0 0 rgba(37,211,102,0);}}
 
+  /* ===== ANNOUNCEMENT BAR ===== */
+  .announce-bar{
+    position:fixed;top:0;left:0;right:0;z-index:1200;
+    background:linear-gradient(90deg,var(--maroon-deep) 0%,var(--maroon) 40%,#8b1a27 60%,var(--maroon) 100%);
+    background-size:200% auto;
+    animation:shine 4s linear infinite;
+    color:var(--gold-light);
+    font-size:0.82rem;font-weight:600;
+    padding:9px 16px;
+    display:flex;align-items:center;justify-content:center;gap:10px;
+    border-bottom:1px solid rgba(205,160,74,0.4);
+    text-align:center;
+    letter-spacing:0.02em;
+  }
+  .announce-bar i{color:var(--saffron-light);animation:none;}
+  .announce-bar a{color:var(--gold-light);text-decoration:underline;text-underline-offset:3px;}
+  .announce-bar .close-bar{
+    position:absolute;right:14px;top:50%;transform:translateY(-50%);
+    background:none;border:none;color:var(--gold-light);cursor:pointer;font-size:1rem;line-height:1;
+    opacity:0.7;padding:2px 6px;
+  }
+  .announce-bar .close-bar:hover{opacity:1;}
+
   /* ===== MOBILE BOTTOM NAV ===== */
   .mobile-bottom-nav{display:none;}
 
@@ -307,14 +330,13 @@
     .mob-nav-gallery{color:var(--gold);}
     .mob-nav-gallery:hover{background:rgba(205,160,74,0.1);}
 
-    /* Hero mobile: photo on top, no crop */
+    /* Hero mobile: photo on top, circle */
     .hero{padding:30px 0 60px;}
     .hero-grid{
       display:flex;flex-direction:column;gap:20px;padding:0 16px;
     }
     .hero-portrait{order:-1;}
-    .portrait-wrap{max-width:260px;margin:0 auto;}
-    .portrait-wrap img{max-width:260px;}
+    .portrait-wrap{width:200px;height:200px;margin:0 auto;}
     .portrait-badge{font-size:0.7rem;padding:7px 14px;bottom:-14px;}
 
     .hero h1{font-size:1.85rem;}
@@ -335,6 +357,14 @@
 </head>
 <body>
 <div class="om-bg"></div>
+
+<!-- ===== ANNOUNCEMENT BAR ===== -->
+<div class="announce-bar" id="announceBar">
+  <i class="fa-solid fa-star"></i>
+  <span>🕉️ Abhi Free Consultation Lein — Pehli Salah Bilkul Muft! &nbsp;|&nbsp; <a href="https://wa.me/917973328909" target="_blank">WhatsApp: +91 79733 28909</a></span>
+  <i class="fa-solid fa-star"></i>
+  <button class="close-bar" onclick="document.getElementById('announceBar').style.display='none';document.body.style.paddingTop='0';" aria-label="Close">✕</button>
+</div>
 
 <!-- NO HEADER — removed as requested -->
 
