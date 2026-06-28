@@ -26,7 +26,7 @@
     background:var(--cream);
     color:var(--ink);
     overflow-x:hidden;
-    padding-top:40px;
+    padding-top:38px; /* ticker bar height */
   }
   h1,h2,h3,.display{font-family:'Yeseva One',serif;}
   .accent-script{font-family:'Cormorant Garamond',serif;font-style:italic;}
@@ -36,12 +36,33 @@
   a{text-decoration:none;color:inherit;}
   .container{max-width:1180px;margin:0 auto;padding:0 24px;}
 
-  @keyframes shine{0%{background-position:-200% center;}100%{background-position:200% center;}}
   @keyframes omFloat{0%,100%{transform:translateY(0) rotate(-6deg);opacity:0.10;}50%{transform:translateY(-22px) rotate(6deg);opacity:0.22;}}
   @keyframes spin{from{transform:translateY(-50%) rotate(0deg);}to{transform:translateY(-50%) rotate(360deg);}}
   @keyframes popIn{from{transform:scale(0.85);opacity:0;}to{transform:scale(1);opacity:1;}}
   @keyframes pulseWa{0%{box-shadow:0 0 0 0 rgba(37,211,102,0.55);}70%{box-shadow:0 0 0 16px rgba(37,211,102,0);}100%{box-shadow:0 0 0 0 rgba(37,211,102,0);}}
   @keyframes pulseCall{0%{box-shadow:0 0 0 0 rgba(232,116,42,0.6);}70%{box-shadow:0 0 0 14px rgba(232,116,42,0);}100%{box-shadow:0 0 0 0 rgba(232,116,42,0);}}
+  @keyframes marquee{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+
+  /* ===== TICKER / MARQUEE BAR ===== */
+  .ticker-bar{
+    position:fixed;top:0;left:0;right:0;z-index:1200;
+    background:linear-gradient(90deg,var(--maroon-deep),var(--maroon) 50%,var(--maroon-deep));
+    border-bottom:1px solid rgba(205,160,74,0.45);
+    height:38px;overflow:hidden;display:flex;align-items:center;
+  }
+  .ticker-track{
+    display:flex;align-items:center;
+    white-space:nowrap;
+    animation:marquee 32s linear infinite;
+  }
+  .ticker-bar:hover .ticker-track{animation-play-state:paused;}
+  .ticker-item{
+    display:inline-flex;align-items:center;gap:9px;
+    color:var(--gold-light);font-size:0.82rem;font-weight:600;letter-spacing:0.03em;
+    padding:0 36px;
+  }
+  .ticker-item i{color:var(--saffron-light);font-size:0.85rem;}
+  .ticker-sep{color:rgba(205,160,74,0.5);padding:0 4px;}
 
   .btn-primary{
     background:linear-gradient(90deg,var(--saffron) 0%,#c9531a 50%,var(--saffron) 100%);
@@ -116,36 +137,13 @@
   .about-point{display:flex;gap:10px;align-items:flex-start;color:#3d2a1c;font-size:0.94rem;}
   .about-point i{color:var(--saffron);margin-top:3px;}
 
-  /* ===== SERVICES — FULL IMAGE FIX ===== */
   .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;}
-  .service-card{
-    background:#fff;border-radius:20px;overflow:hidden;
-    border:1px solid rgba(205,160,74,0.25);
-    box-shadow:0 12px 36px rgba(92,14,22,0.08);
-    transition:transform .35s,box-shadow .35s;
-    position:relative;
-    display:flex;flex-direction:column;
-  }
+  .service-card{background:#fff;border-radius:20px;overflow:hidden;border:1px solid rgba(205,160,74,0.25);box-shadow:0 12px 36px rgba(92,14,22,0.08);transition:transform .35s,box-shadow .35s;position:relative;display:flex;flex-direction:column;}
   .service-card:hover{transform:translateY(-10px);box-shadow:0 24px 50px rgba(92,14,22,0.18);}
-
-  /* Image shows fully — no crop, no height clamp */
-  .service-img{
-    width:100%;
-    position:relative;
-    overflow:hidden;
-    background:#f5ece0;
-    flex-shrink:0;
-  }
-  .service-img img{
-    display:block;
-    width:100%;
-    height:auto;        /* FULL image, no crop */
-    object-fit:unset;
-    transition:transform .5s;
-  }
+  .service-img{width:100%;position:relative;overflow:hidden;background:#f5ece0;flex-shrink:0;}
+  .service-img img{display:block;width:100%;height:auto;object-fit:unset;transition:transform .5s;}
   .service-card:hover .service-img img{transform:scale(1.04);}
   .service-img-overlay{position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(61,10,16,0.55) 100%);pointer-events:none;}
-  .service-badge{position:absolute;top:12px;left:12px;background:linear-gradient(135deg,var(--saffron),#c9531a);color:#fff;border-radius:30px;padding:5px 12px;font-size:0.72rem;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;display:flex;align-items:center;gap:6px;}
   .service-body{padding:22px 22px 24px;flex:1;display:flex;flex-direction:column;}
   .service-card h3{font-size:1.15rem;color:var(--maroon-deep);margin-bottom:8px;font-family:'Mukta',sans-serif;font-weight:700;}
   .service-card p{color:#6b5848;font-size:0.92rem;line-height:1.65;flex:1;}
@@ -206,12 +204,6 @@
   .float-call-btn{width:60px;height:60px;border-radius:50%;background:#e8742a;color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.5rem;box-shadow:0 8px 22px rgba(232,116,42,0.55);text-decoration:none;animation:pulseCall 2.2s infinite;}
   .float-wa-btn{width:60px;height:60px;border-radius:50%;background:#25D366;color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.7rem;box-shadow:0 10px 26px rgba(0,0,0,0.25);animation:pulseWa 2.4s infinite;text-decoration:none;}
 
-  .announce-bar{position:fixed;top:0;left:0;right:0;z-index:1200;background:linear-gradient(90deg,var(--maroon-deep) 0%,var(--maroon) 40%,#8b1a27 60%,var(--maroon) 100%);background-size:200% auto;animation:shine 4s linear infinite;color:var(--gold-light);font-size:0.82rem;font-weight:600;padding:9px 16px;display:flex;align-items:center;justify-content:center;gap:10px;border-bottom:1px solid rgba(205,160,74,0.4);text-align:center;letter-spacing:0.02em;}
-  .announce-bar i{color:var(--saffron-light);}
-  .announce-bar a{color:var(--gold-light);text-decoration:underline;text-underline-offset:3px;}
-  .announce-bar .close-bar{position:absolute;right:14px;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--gold-light);cursor:pointer;font-size:1rem;opacity:0.7;padding:2px 6px;}
-  .announce-bar .close-bar:hover{opacity:1;}
-
   .mobile-bottom-nav{display:none;}
 
   .modal-overlay{position:fixed;inset:0;background:rgba(20,5,7,0.72);display:none;align-items:center;justify-content:center;z-index:2000;padding:20px;}
@@ -226,7 +218,6 @@
   .form-group input:focus{outline:none;border-color:var(--saffron);}
   .form-note{text-align:center;font-size:0.78rem;color:#8a7766;margin-top:14px;}
 
-  /* ===== RESPONSIVE ===== */
   @media(max-width:980px){
     .hero-grid{grid-template-columns:1fr;text-align:center;}
     .hero p.desc{margin:0 auto 34px;}
@@ -242,21 +233,10 @@
 
   @media(max-width:680px){
     body{padding-bottom:64px;}
-
-    /* ===== MOBILE: Services = 1 column ===== */
-    .services-grid{
-      grid-template-columns:1fr !important;
-      gap:20px;
-    }
-    /* Image full natural height on mobile too */
-    .service-img img{
-      width:100%;
-      height:auto;
-    }
+    .services-grid{grid-template-columns:1fr !important;gap:20px;}
     .service-body{padding:18px 18px 20px;}
     .service-card h3{font-size:1.05rem;}
     .service-card p{font-size:0.9rem;}
-
     .gallery-grid{grid-template-columns:repeat(2,1fr);gap:12px;}
     .test-card{min-width:calc(100vw - 60px);max-width:calc(100vw - 60px);}
     .float-btns{bottom:80px;right:14px;gap:10px;}
@@ -293,13 +273,31 @@
 <body>
 <div class="om-bg"></div>
 
-<div class="announce-bar" id="announceBar">
-  <i class="fa-solid fa-star"></i>
-  <span>🕉️ Abhi Free Consultation Lein — Pehli Salah Bilkul Muft! &nbsp;|&nbsp; <a href="https://wa.me/917973328909" target="_blank">WhatsApp: +91 79733 28909</a></span>
-  <i class="fa-solid fa-star"></i>
-  <button class="close-bar" onclick="document.getElementById('announceBar').style.display='none';document.body.style.paddingTop='0';" aria-label="Close">✕</button>
+<!-- AUTO-SCROLL TICKER BAR (replaces announce bar) -->
+<div class="ticker-bar">
+  <div class="ticker-track" id="tickerTrack">
+    <!-- Items duplicated for seamless loop -->
+    <span class="ticker-item"><i class="fa-solid fa-star"></i> 5000+ Happy Clients</span>
+    <span class="ticker-item"><i class="fa-solid fa-shield-heart"></i> 100% Private &amp; Trusted</span>
+    <span class="ticker-item"><i class="fa-solid fa-clock"></i> Available 24x7</span>
+    <span class="ticker-item"><i class="fa-solid fa-om"></i> 25+ Saal Ka Anubhav</span>
+    <span class="ticker-item"><i class="fa-brands fa-whatsapp"></i> WhatsApp: +91 79733 28909</span>
+    <span class="ticker-item"><i class="fa-solid fa-hand-holding-heart"></i> Pehli Consultation Bilkul Muft!</span>
+    <span class="ticker-item"><i class="fa-solid fa-lock"></i> Aapki Baat 100% Gupt Rahegi</span>
+    <span class="ticker-item"><i class="fa-solid fa-gem"></i> Vedic Jyotish &bull; Vastu &bull; Tantrik Sadhna</span>
+    <!-- Duplicate for seamless loop -->
+    <span class="ticker-item"><i class="fa-solid fa-star"></i> 5000+ Happy Clients</span>
+    <span class="ticker-item"><i class="fa-solid fa-shield-heart"></i> 100% Private &amp; Trusted</span>
+    <span class="ticker-item"><i class="fa-solid fa-clock"></i> Available 24x7</span>
+    <span class="ticker-item"><i class="fa-solid fa-om"></i> 25+ Saal Ka Anubhav</span>
+    <span class="ticker-item"><i class="fa-brands fa-whatsapp"></i> WhatsApp: +91 79733 28909</span>
+    <span class="ticker-item"><i class="fa-solid fa-hand-holding-heart"></i> Pehli Consultation Bilkul Muft!</span>
+    <span class="ticker-item"><i class="fa-solid fa-lock"></i> Aapki Baat 100% Gupt Rahegi</span>
+    <span class="ticker-item"><i class="fa-solid fa-gem"></i> Vedic Jyotish &bull; Vastu &bull; Tantrik Sadhna</span>
+  </div>
 </div>
 
+<!-- HERO -->
 <section class="hero">
   <span class="om-icon">ॐ</span><span class="om-icon">ॐ</span><span class="om-icon">ॐ</span>
   <span class="om-icon">ॐ</span><span class="om-icon">ॐ</span><span class="om-icon">ॐ</span>
@@ -329,6 +327,7 @@
   </div>
 </section>
 
+<!-- ABOUT -->
 <section id="about">
   <div class="container about-grid">
     <div class="about-photo-wrap">
@@ -350,6 +349,7 @@
   </div>
 </section>
 
+<!-- SERVICES -->
 <section id="services" class="alt">
   <div class="container">
     <div class="sec-head">
@@ -386,6 +386,7 @@
   </div>
 </section>
 
+<!-- GALLERY -->
 <section id="gallery">
   <div class="container">
     <div class="sec-head">
@@ -402,6 +403,7 @@
   </div>
 </section>
 
+<!-- TESTIMONIALS -->
 <section id="testimonials" class="alt">
   <div class="container">
     <div class="sec-head">
@@ -446,6 +448,7 @@
   </div>
 </section>
 
+<!-- FAQ -->
 <section id="faq">
   <div class="container">
     <div class="sec-head">
@@ -460,7 +463,7 @@
       </div>
       <div class="faq-item">
         <button class="faq-q" onclick="toggleFaq(this)"><span>Kya meri baat poori tarah gupt rahegi?</span><div class="faq-icon"><i class="fa-solid fa-plus"></i></div></button>
-        <div class="faq-a"><div class="faq-a-inner">Aapki privacy hamari sabse badi zimmedaari hai. Guru ji se jo bhi baat hoti hai woh 100% gupt rehti hai. Aapki kundli, samasya ya vyaktigat baatein kabhi kisi ke saath share nahi ki jaati. Aap nishchint hokar apni baat khul ke kar sakte hain.</div></div>
+        <div class="faq-a"><div class="faq-a-inner">Aapki privacy hamari sabse badi zimmedaari hai. Guru ji se jo bhi baat hoti hai woh 100% gupt rehti hai. Aapki kundli, samasya ya vyaktigat baatein kabhi kisi ke saath share nahi ki jaati.</div></div>
       </div>
       <div class="faq-item">
         <button class="faq-q" onclick="toggleFaq(this)"><span>Consultation ke liye kya WhatsApp par baat ho sakti hai?</span><div class="faq-icon"><i class="fa-solid fa-plus"></i></div></button>
@@ -468,12 +471,13 @@
       </div>
       <div class="faq-item">
         <button class="faq-q" onclick="toggleFaq(this)"><span>Upay karne mein kitna waqt lagta hai aur kya result milta hai?</span><div class="faq-icon"><i class="fa-solid fa-plus"></i></div></button>
-        <div class="faq-a"><div class="faq-a-inner">Har vyakti ki samasya aur uski kundli ke hisaab se waqt alag hota hai. Kuch upay 7-21 din mein asar dikhate hain jabke kuch ko 40-90 din lagte hain. Guru ji sirf wahi upay batate hain jo shastra-sammat aur vyaktigat kundli ke hisaab se sahi hon — koi generic formula nahi diya jaata.</div></div>
+        <div class="faq-a"><div class="faq-a-inner">Har vyakti ki samasya aur uski kundli ke hisaab se waqt alag hota hai. Kuch upay 7-21 din mein asar dikhate hain jabke kuch ko 40-90 din lagte hain. Guru ji sirf wahi upay batate hain jo shastra-sammat aur vyaktigat kundli ke hisaab se sahi hon.</div></div>
       </div>
     </div>
   </div>
 </section>
 
+<!-- CONTACT -->
 <section class="alt">
   <div class="container">
     <div class="contact-band">
@@ -495,6 +499,7 @@
   </div>
 </section>
 
+<!-- FOOTER -->
 <footer>
   <div class="container">
     <div class="brand">
@@ -514,11 +519,13 @@
   </div>
 </footer>
 
+<!-- FLOATING BUTTONS -->
 <div class="float-btns">
   <a class="float-call-btn" href="tel:+917973328909" aria-label="Call Guru Ji"><i class="fa-solid fa-phone"></i></a>
   <a class="float-wa-btn" href="https://wa.me/917973328909" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
 </div>
 
+<!-- MOBILE BOTTOM NAV -->
 <nav class="mobile-bottom-nav" aria-label="Mobile navigation">
   <a href="#about" class="mob-nav-item"><i class="fa-solid fa-om"></i><span>Guru Ji</span></a>
   <a href="#services" class="mob-nav-item"><i class="fa-solid fa-scroll"></i><span>Services</span></a>
@@ -527,6 +534,7 @@
   <a href="#gallery" class="mob-nav-item"><i class="fa-solid fa-images"></i><span>Gallery</span></a>
 </nav>
 
+<!-- MODAL -->
 <div class="modal-overlay" id="modalOverlay">
   <div class="modal-box">
     <button class="modal-close" onclick="closeModal()" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
@@ -558,27 +566,27 @@
   });
   setTimeout(function(){openModal();},3000);
 
+  /* SLIDER */
   (function(){
-    var track = document.getElementById('sliderTrack');
-    var dotsContainer = document.getElementById('sliderDots');
-    var cards = track.querySelectorAll('.test-card');
-    var total = cards.length;
-    var current = 0;
+    var track=document.getElementById('sliderTrack');
+    var dotsContainer=document.getElementById('sliderDots');
+    var cards=track.querySelectorAll('.test-card');
+    var total=cards.length;
+    var current=0;
     var autoTimer;
-    var gap = 24;
-    var visibleCount = 1;
+    var gap=24;
+    var visibleCount=1;
 
     function getCardWidth(){
-      if(window.innerWidth >= 980){ visibleCount = 3; }
-      else if(window.innerWidth >= 600){ visibleCount = 2; }
-      else { visibleCount = 1; }
+      if(window.innerWidth>=980){visibleCount=3;}
+      else if(window.innerWidth>=600){visibleCount=2;}
+      else{visibleCount=1;}
       return cards[0].offsetWidth;
     }
-
     function buildDots(){
       dotsContainer.innerHTML='';
-      var pages = total - visibleCount + 1;
-      if(pages < 1) pages = 1;
+      var pages=total-visibleCount+1;
+      if(pages<1)pages=1;
       for(var i=0;i<pages;i++){
         var d=document.createElement('button');
         d.className='slider-dot'+(i===0?' active':'');
@@ -587,48 +595,41 @@
         dotsContainer.appendChild(d);
       }
     }
-
     function updateDots(){
       var dots=dotsContainer.querySelectorAll('.slider-dot');
       dots.forEach(function(d,i){d.classList.toggle('active',i===current);});
     }
-
     function goTo(idx){
-      var cardW = getCardWidth();
-      var pages = total - visibleCount + 1;
-      if(pages<1) pages=1;
-      current = Math.max(0, Math.min(idx, pages-1));
+      var cardW=getCardWidth();
+      var pages=total-visibleCount+1;
+      if(pages<1)pages=1;
+      current=Math.max(0,Math.min(idx,pages-1));
       track.style.transform='translateX(-'+((cardW+gap)*current)+'px)';
       updateDots();
     }
-
     function next(){var pages=total-visibleCount+1;goTo(current+1>=pages?0:current+1);}
     function prev(){var pages=total-visibleCount+1;goTo(current-1<0?pages-1:current-1);}
-
-    function startAuto(){ autoTimer = setInterval(next, 3500); }
-    function stopAuto(){ clearInterval(autoTimer); }
-
+    function startAuto(){autoTimer=setInterval(next,3500);}
+    function stopAuto(){clearInterval(autoTimer);}
     document.getElementById('sliderNext').addEventListener('click',function(){stopAuto();next();startAuto();});
     document.getElementById('sliderPrev').addEventListener('click',function(){stopAuto();prev();startAuto();});
-
     var touchStartX=0;
     track.addEventListener('touchstart',function(e){touchStartX=e.touches[0].clientX;stopAuto();},{passive:true});
     track.addEventListener('touchend',function(e){
       var diff=touchStartX-e.changedTouches[0].clientX;
-      if(Math.abs(diff)>40){ diff>0?next():prev(); }
+      if(Math.abs(diff)>40){diff>0?next():prev();}
       startAuto();
     });
-
     window.addEventListener('resize',function(){buildDots();goTo(0);});
-    buildDots();
-    startAuto();
+    buildDots();startAuto();
   })();
 
+  /* FAQ */
   function toggleFaq(btn){
-    var item = btn.parentElement;
-    var isOpen = item.classList.contains('open');
+    var item=btn.parentElement;
+    var isOpen=item.classList.contains('open');
     document.querySelectorAll('.faq-item.open').forEach(function(el){el.classList.remove('open');});
-    if(!isOpen) item.classList.add('open');
+    if(!isOpen)item.classList.add('open');
   }
 </script>
 </body>
