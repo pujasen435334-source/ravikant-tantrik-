@@ -26,7 +26,7 @@
     background:var(--cream);
     color:var(--ink);
     overflow-x:hidden;
-    padding-top:40px; /* announcement bar height */
+    padding-top:40px;
   }
   h1,h2,h3,.display{font-family:'Yeseva One',serif;}
   .accent-script{font-family:'Cormorant Garamond',serif;font-style:italic;}
@@ -38,42 +38,38 @@
   a{text-decoration:none;color:inherit;}
   .container{max-width:1180px;margin:0 auto;padding:0 24px;}
 
-  /* ===== SHINING ANIMATIONS ===== */
+  /* ===== ANIMATIONS (kept everywhere EXCEPT buttons) ===== */
   @keyframes shine{0%{background-position:-200% center;}100%{background-position:200% center;}}
-  @keyframes pulse-btn{0%,100%{box-shadow:0 10px 30px rgba(232,116,42,0.45);}50%{box-shadow:0 10px 42px rgba(232,116,42,0.75),0 0 0 6px rgba(232,116,42,0.18);}}
   @keyframes slideShine{0%{left:-75%;}100%{left:130%;}}
+  @keyframes pulse-btn{0%,100%{box-shadow:0 10px 30px rgba(232,116,42,0.45);}50%{box-shadow:0 10px 42px rgba(232,116,42,0.75),0 0 0 6px rgba(232,116,42,0.18);}}
 
-  /* ===== BUTTONS ===== */
+  /* ===== BUTTONS — NO shine animation ===== */
   .btn-primary{
-    background:linear-gradient(90deg,var(--saffron) 0%,#c9531a 30%,var(--saffron-light) 50%,#c9531a 70%,var(--saffron) 100%);
-    background-size:200% auto;
+    background:linear-gradient(90deg,var(--saffron) 0%,#c9531a 50%,var(--saffron) 100%);
     color:#fff;padding:16px 32px;border-radius:40px;font-weight:600;font-size:1rem;
     display:inline-flex;align-items:center;gap:10px;
     border:none;cursor:pointer;
-    animation:shine 2.5s linear infinite,pulse-btn 2s ease-in-out infinite;
-    transition:transform .25s;
+    box-shadow:0 10px 30px rgba(232,116,42,0.45);
+    transition:transform .25s, box-shadow .25s;
   }
-  .btn-primary:hover{transform:translateY(-3px) scale(1.04);}
+  .btn-primary:hover{transform:translateY(-3px) scale(1.04);box-shadow:0 14px 38px rgba(232,116,42,0.65);}
 
   .btn-ghost{
     color:var(--gold-light);padding:16px 26px;border-radius:40px;font-weight:600;font-size:1rem;
     border:1px solid rgba(205,160,74,0.5);display:inline-flex;align-items:center;gap:10px;
-    position:relative;overflow:hidden;background:transparent;
+    background:transparent;transition:background .25s;
   }
-  .btn-ghost::after{content:"";position:absolute;top:0;left:-75%;width:50%;height:100%;
-    background:linear-gradient(90deg,transparent,rgba(255,255,255,0.18),transparent);
-    animation:slideShine 2.2s linear infinite;}
   .btn-ghost:hover{background:rgba(205,160,74,0.12);}
 
   .modal-submit{
     width:100%;
-    background:linear-gradient(90deg,#25D366 0%,#1aa84f 30%,#5eff99 50%,#1aa84f 70%,#25D366 100%);
-    background-size:200% auto;
+    background:linear-gradient(90deg,#25D366 0%,#1aa84f 50%,#25D366 100%);
     color:#fff;padding:15px;border-radius:12px;border:none;font-size:1rem;font-weight:700;
     display:flex;align-items:center;justify-content:center;gap:10px;cursor:pointer;margin-top:6px;
-    animation:shine 2.5s linear infinite;transition:transform .2s;
+    box-shadow:0 8px 22px rgba(37,211,102,0.4);
+    transition:transform .2s, box-shadow .2s;
   }
-  .modal-submit:hover{transform:translateY(-2px);}
+  .modal-submit:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(37,211,102,0.55);}
 
   /* ===== HERO ===== */
   .hero{
@@ -87,7 +83,7 @@
   .hero::before{content:"";position:absolute;inset:0;
     background-image:repeating-linear-gradient(45deg,rgba(205,160,74,0.04) 0 2px,transparent 2px 40px);}
 
-  /* Om floating icons */
+  /* Om floating icons — kept */
   .om-icon{
     position:absolute;color:rgba(205,160,74,0.13);
     font-family:'Yeseva One',serif;font-size:5rem;pointer-events:none;user-select:none;
@@ -130,7 +126,7 @@
   .hero p.desc{color:rgba(255,255,255,0.82);font-size:1.02rem;max-width:520px;margin-bottom:34px;line-height:1.7;}
   .hero-actions{display:flex;gap:16px;flex-wrap:wrap;}
 
-  /* Portrait — oval portrait shape showing full head */
+  /* Portrait — same shape desktop and mobile */
   .hero-portrait{position:relative;display:flex;justify-content:center;}
   .portrait-wrap{
     position:relative;
@@ -194,19 +190,10 @@
     position:relative;
   }
   .service-card:hover{transform:translateY(-10px);box-shadow:0 24px 50px rgba(92,14,22,0.18);}
-  .service-img{
-    width:100%;height:180px;overflow:hidden;position:relative;
-  }
-  .service-img img{
-    width:100%;height:100%;object-fit:cover;
-    transition:transform .5s;
-    display:block;
-  }
+  .service-img{width:100%;height:180px;overflow:hidden;position:relative;}
+  .service-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s;display:block;}
   .service-card:hover .service-img img{transform:scale(1.08);}
-  .service-img-overlay{
-    position:absolute;inset:0;
-    background:linear-gradient(180deg,transparent 40%,rgba(61,10,16,0.7) 100%);
-  }
+  .service-img-overlay{position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(61,10,16,0.7) 100%);}
   .service-badge{
     position:absolute;top:12px;left:12px;
     background:linear-gradient(135deg,var(--saffron),#c9531a);
@@ -272,11 +259,24 @@
   .footer-links{display:flex;justify-content:center;gap:20px;margin:16px 0;font-size:0.9rem;}
   .footer-links a{color:var(--gold-light);}
 
-  /* ===== FLOATING WHATSAPP (desktop) ===== */
-  .wa-float{position:fixed;bottom:26px;right:26px;z-index:999;width:60px;height:60px;border-radius:50%;
-    background:#25D366;color:#fff;display:flex;align-items:center;justify-content:center;
-    font-size:1.7rem;box-shadow:0 10px 26px rgba(0,0,0,0.3);animation:pulseWa 2.4s infinite;}
-  @keyframes pulseWa{0%{box-shadow:0 0 0 0 rgba(37,211,102,0.55);}70%{box-shadow:0 0 0 16px rgba(37,211,102,0);}100%{box-shadow:0 0 0 0 rgba(37,211,102,0);}}
+  /* ===== DESKTOP FLOATING WA ===== */
+  .wa-float{
+    position:fixed;bottom:26px;right:26px;z-index:999;
+    width:60px;height:60px;border-radius:50%;
+    background:#25D366;color:#fff;
+    display:flex;align-items:center;justify-content:center;
+    font-size:1.7rem;
+    box-shadow:0 10px 26px rgba(0,0,0,0.3);
+    animation:pulseWa 2.4s infinite;
+  }
+  @keyframes pulseWa{
+    0%{box-shadow:0 0 0 0 rgba(37,211,102,0.55);}
+    70%{box-shadow:0 0 0 16px rgba(37,211,102,0);}
+    100%{box-shadow:0 0 0 0 rgba(37,211,102,0);}
+  }
+
+  /* ===== MOBILE FLOATING BUTTONS ===== */
+  .mobile-float-btns{display:none;}
 
   /* ===== ANNOUNCEMENT BAR ===== */
   .announce-bar{
@@ -289,10 +289,9 @@
     padding:9px 16px;
     display:flex;align-items:center;justify-content:center;gap:10px;
     border-bottom:1px solid rgba(205,160,74,0.4);
-    text-align:center;
-    letter-spacing:0.02em;
+    text-align:center;letter-spacing:0.02em;
   }
-  .announce-bar i{color:var(--saffron-light);animation:none;}
+  .announce-bar i{color:var(--saffron-light);}
   .announce-bar a{color:var(--gold-light);text-decoration:underline;text-underline-offset:3px;}
   .announce-bar .close-bar{
     position:absolute;right:14px;top:50%;transform:translateY(-50%);
@@ -334,11 +333,48 @@
   }
 
   @media(max-width:680px){
-    /* Hide desktop floating WA, show bottom nav */
+    /* Hide desktop floating WA button on mobile */
     .wa-float{display:none;}
 
     body{padding-bottom:64px;}
 
+    /* ===== MOBILE FLOATING CALL + WA BUTTONS ===== */
+    .mobile-float-btns{
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+      position:fixed;
+      bottom:80px; /* above mobile bottom nav */
+      right:16px;
+      z-index:1050;
+    }
+    .mob-float-call{
+      width:54px;height:54px;border-radius:50%;
+      background:#e8742a; /* orange */
+      color:#fff;
+      display:flex;align-items:center;justify-content:center;
+      font-size:1.45rem;
+      box-shadow:0 8px 22px rgba(232,116,42,0.55);
+      text-decoration:none;
+      animation:pulseCall 2.2s infinite;
+    }
+    @keyframes pulseCall{
+      0%{box-shadow:0 0 0 0 rgba(232,116,42,0.6);}
+      70%{box-shadow:0 0 0 14px rgba(232,116,42,0);}
+      100%{box-shadow:0 0 0 0 rgba(232,116,42,0);}
+    }
+    .mob-float-wa{
+      width:54px;height:54px;border-radius:50%;
+      background:#25D366;
+      color:#fff;
+      display:flex;align-items:center;justify-content:center;
+      font-size:1.5rem;
+      box-shadow:0 8px 22px rgba(37,211,102,0.5);
+      text-decoration:none;
+      animation:pulseWa 2.4s infinite;
+    }
+
+    /* Mobile bottom nav */
     .mobile-bottom-nav{
       display:flex;
       position:fixed;bottom:0;left:0;right:0;z-index:1100;
@@ -350,26 +386,29 @@
       flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
       gap:3px;font-size:0.58rem;font-weight:600;text-transform:uppercase;letter-spacing:0.04em;
       padding:6px 2px;border:none;background:transparent;cursor:pointer;text-decoration:none;
+      color:var(--gold-light);
       transition:background .2s;
     }
     .mob-nav-item i{font-size:1.15rem;}
-
-    /* All mob nav items same color — maroon bg, gold text */
-    .mob-nav-guru,.mob-nav-services,.mob-nav-consult,.mob-nav-wa,.mob-nav-gallery{
-      color:var(--gold-light);
-      background:transparent;
-    }
     .mob-nav-item:hover,.mob-nav-item:active{background:rgba(205,160,74,0.1);}
 
-    /* Hero mobile: photo on top, circle */
+    /* Hero mobile: SAME portrait size as desktop (340x420) */
     .hero{padding:30px 0 60px;}
     .hero-grid{
       display:flex;flex-direction:column;gap:20px;padding:0 16px;
     }
     .hero-portrait{order:-1;}
-    .portrait-wrap{width:260px;height:320px;margin:0 auto;}
-    .portrait-wrap img{object-fit:contain;object-position:center center;background:var(--maroon-deep);}
-    .portrait-badge{font-size:0.7rem;padding:7px 14px;bottom:-14px;}
+    /* Keep same oval dimensions as desktop */
+    .portrait-wrap{
+      width:340px;
+      height:420px;
+      margin:0 auto;
+    }
+    .portrait-wrap img{
+      object-fit:cover;
+      object-position:top center;
+    }
+    .portrait-badge{font-size:0.75rem;padding:8px 16px;bottom:-16px;}
 
     .hero h1{font-size:1.85rem;}
     .hero .tagline{font-size:1.05rem;}
@@ -398,11 +437,8 @@
   <button class="close-bar" onclick="document.getElementById('announceBar').style.display='none';document.body.style.paddingTop='0';" aria-label="Close">✕</button>
 </div>
 
-<!-- NO HEADER — removed as requested -->
-
 <!-- ===== HERO ===== -->
 <section class="hero">
-  <!-- Animated Om icons -->
   <span class="om-icon">ॐ</span>
   <span class="om-icon">ॐ</span>
   <span class="om-icon">ॐ</span>
@@ -466,7 +502,6 @@
       <p>Apke jeevan ki har samasya ke liye shastra-sammat aur vyaktigat margdarshan.</p>
     </div>
     <div class="services-grid">
-
       <div class="service-card">
         <div class="service-img">
           <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=500&q=80" alt="Kundli Vishleshan">
@@ -479,7 +514,6 @@
           <button class="service-link" onclick="openModal()">Consultation Lein <i class="fa-solid fa-arrow-right"></i></button>
         </div>
       </div>
-
       <div class="service-card">
         <div class="service-img">
           <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=500&q=80" alt="Vivah Samasya">
@@ -492,7 +526,6 @@
           <button class="service-link" onclick="openModal()">Consultation Lein <i class="fa-solid fa-arrow-right"></i></button>
         </div>
       </div>
-
       <div class="service-card">
         <div class="service-img">
           <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=500&q=80" alt="Career Vyapar">
@@ -505,7 +538,6 @@
           <button class="service-link" onclick="openModal()">Consultation Lein <i class="fa-solid fa-arrow-right"></i></button>
         </div>
       </div>
-
       <div class="service-card">
         <div class="service-img">
           <img src="https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?w=500&q=80" alt="Vastu Shastra">
@@ -518,7 +550,6 @@
           <button class="service-link" onclick="openModal()">Consultation Lein <i class="fa-solid fa-arrow-right"></i></button>
         </div>
       </div>
-
       <div class="service-card">
         <div class="service-img">
           <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=500&q=80" alt="Tantrik Pooja">
@@ -531,7 +562,6 @@
           <button class="service-link" onclick="openModal()">Consultation Lein <i class="fa-solid fa-arrow-right"></i></button>
         </div>
       </div>
-
       <div class="service-card">
         <div class="service-img">
           <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?w=500&q=80" alt="Ratna Salah">
@@ -544,7 +574,6 @@
           <button class="service-link" onclick="openModal()">Consultation Lein <i class="fa-solid fa-arrow-right"></i></button>
         </div>
       </div>
-
     </div>
   </div>
 </section>
@@ -640,26 +669,38 @@
   </div>
 </footer>
 
-<!-- Floating WA — desktop only -->
+<!-- ===== DESKTOP FLOATING WA ===== -->
 <a class="wa-float" href="https://wa.me/917973328909" target="_blank" rel="noopener" aria-label="WhatsApp">
   <i class="fa-brands fa-whatsapp"></i>
 </a>
 
-<!-- ===== MOBILE FIXED BOTTOM NAV ===== -->
+<!-- ===== MOBILE FLOATING CALL + WHATSAPP BUTTONS ===== -->
+<div class="mobile-float-btns" aria-label="Quick contact">
+  <!-- Call button (orange) — TOP -->
+  <a class="mob-float-call" href="tel:+917973328909" aria-label="Call Guru Ji">
+    <i class="fa-solid fa-phone"></i>
+  </a>
+  <!-- WhatsApp button (green) — BOTTOM -->
+  <a class="mob-float-wa" href="https://wa.me/917973328909" target="_blank" rel="noopener" aria-label="WhatsApp">
+    <i class="fa-brands fa-whatsapp"></i>
+  </a>
+</div>
+
+<!-- ===== MOBILE BOTTOM NAV ===== -->
 <nav class="mobile-bottom-nav" aria-label="Mobile navigation">
-  <a href="#about" class="mob-nav-item mob-nav-guru">
+  <a href="#about" class="mob-nav-item">
     <i class="fa-solid fa-om"></i><span>Guru Ji</span>
   </a>
-  <a href="#services" class="mob-nav-item mob-nav-services">
+  <a href="#services" class="mob-nav-item">
     <i class="fa-solid fa-scroll"></i><span>Services</span>
   </a>
-  <button class="mob-nav-item mob-nav-consult" onclick="openModal()">
+  <button class="mob-nav-item" onclick="openModal()">
     <i class="fa-solid fa-calendar-check"></i><span>Consult</span>
   </button>
-  <a href="https://wa.me/917973328909" target="_blank" rel="noopener" class="mob-nav-item mob-nav-wa">
+  <a href="https://wa.me/917973328909" target="_blank" rel="noopener" class="mob-nav-item">
     <i class="fa-brands fa-whatsapp"></i><span>WhatsApp</span>
   </a>
-  <a href="#gallery" class="mob-nav-item mob-nav-gallery">
+  <a href="#gallery" class="mob-nav-item">
     <i class="fa-solid fa-images"></i><span>Gallery</span>
   </a>
 </nav>
@@ -694,7 +735,6 @@
     window.open("https://wa.me/917973328909?text="+encodeURIComponent(msg),"_blank");
     closeModal();this.reset();
   });
-  // Auto open popup after 3 seconds
   setTimeout(function(){openModal();},3000);
 </script>
 </body>
