@@ -185,15 +185,45 @@
   .about-point i{color:var(--saffron);margin-top:3px;}
 
   /* ===== SERVICES ===== */
-  .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;}
-  .service-card{background:#fff;border-radius:16px;padding:32px 26px;border:1px solid rgba(205,160,74,0.3);
-    box-shadow:0 10px 30px rgba(92,14,22,0.06);transition:transform .3s,box-shadow .3s;}
-  .service-card:hover{transform:translateY(-8px);box-shadow:0 18px 40px rgba(92,14,22,0.14);}
-  .service-icon{width:58px;height:58px;border-radius:14px;
-    background:linear-gradient(135deg,var(--saffron-light),var(--saffron));
-    display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.5rem;margin-bottom:18px;}
-  .service-card h3{font-size:1.2rem;color:var(--maroon-deep);margin-bottom:10px;font-family:'Mukta',sans-serif;font-weight:700;}
-  .service-card p{color:#6b5848;font-size:0.93rem;line-height:1.65;}
+  .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;}
+  .service-card{
+    background:#fff;border-radius:20px;overflow:hidden;
+    border:1px solid rgba(205,160,74,0.25);
+    box-shadow:0 12px 36px rgba(92,14,22,0.08);
+    transition:transform .35s,box-shadow .35s;
+    position:relative;
+  }
+  .service-card:hover{transform:translateY(-10px);box-shadow:0 24px 50px rgba(92,14,22,0.18);}
+  .service-img{
+    width:100%;height:180px;overflow:hidden;position:relative;
+  }
+  .service-img img{
+    width:100%;height:100%;object-fit:cover;
+    transition:transform .5s;
+    display:block;
+  }
+  .service-card:hover .service-img img{transform:scale(1.08);}
+  .service-img-overlay{
+    position:absolute;inset:0;
+    background:linear-gradient(180deg,transparent 40%,rgba(61,10,16,0.7) 100%);
+  }
+  .service-badge{
+    position:absolute;top:12px;left:12px;
+    background:linear-gradient(135deg,var(--saffron),#c9531a);
+    color:#fff;border-radius:30px;padding:5px 12px;
+    font-size:0.72rem;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;
+    display:flex;align-items:center;gap:6px;
+  }
+  .service-body{padding:22px 22px 24px;}
+  .service-card h3{font-size:1.15rem;color:var(--maroon-deep);margin-bottom:8px;font-family:'Mukta',sans-serif;font-weight:700;}
+  .service-card p{color:#6b5848;font-size:0.92rem;line-height:1.65;}
+  .service-link{
+    display:inline-flex;align-items:center;gap:6px;margin-top:14px;
+    color:var(--saffron);font-weight:600;font-size:0.88rem;
+    cursor:pointer;border:none;background:none;padding:0;
+  }
+  .service-link i{font-size:0.8rem;transition:transform .2s;}
+  .service-card:hover .service-link i{transform:translateX(4px);}
 
   /* ===== GALLERY ===== */
   .gallery-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;}
@@ -436,12 +466,85 @@
       <p>Apke jeevan ki har samasya ke liye shastra-sammat aur vyaktigat margdarshan.</p>
     </div>
     <div class="services-grid">
-      <div class="service-card"><div class="service-icon"><i class="fa-solid fa-scroll"></i></div><h3>Kundli Vishleshan</h3><p>Janma kundli ka vistrit adhyayan karke graho ki sthiti aur unka jeevan par prabhav samjhaya jaata hai.</p></div>
-      <div class="service-card"><div class="service-icon"><i class="fa-solid fa-heart"></i></div><h3>Vivah &amp; Prem Samasya</h3><p>Vivah mein aa rahi badhaon aur prem sambandhi uljhanon ke liye sahi aur sachha margdarshan.</p></div>
-      <div class="service-card"><div class="service-icon"><i class="fa-solid fa-briefcase"></i></div><h3>Career &amp; Vyapar</h3><p>Naukri, business aur dhan-laabh se judi samasyaon ka jyotish-aadharit vishleshan aur salah.</p></div>
-      <div class="service-card"><div class="service-icon"><i class="fa-solid fa-house"></i></div><h3>Vastu Shastra</h3><p>Ghar aur office mein vastu dosh ki pehchaan karke saral upayon se sukh-shanti laane ka margdarshan.</p></div>
-      <div class="service-card"><div class="service-icon"><i class="fa-solid fa-hand-sparkles"></i></div><h3>Tantrik Pooja Sadhna</h3><p>Vidhi-vidhan se tantrik pooja aur sadhna, shastron ki paramparaon ke anusaar sampann karwana.</p></div>
-      <div class="service-card"><div class="service-icon"><i class="fa-solid fa-gem"></i></div><h3>Ratna &amp; Upaye Salah</h3><p>Janma kundli ke aadhar par sahi ratna, rudraksha aur upayon ki sahi salah.</p></div>
+
+      <div class="service-card">
+        <div class="service-img">
+          <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=500&q=80" alt="Kundli Vishleshan">
+          <div class="service-img-overlay"></div>
+          <div class="service-badge"><i class="fa-solid fa-scroll"></i> Jyotish</div>
+        </div>
+        <div class="service-body">
+          <h3>Kundli Vishleshan</h3>
+          <p>Janma kundli ka vistrit adhyayan karke graho ki sthiti aur unka jeevan par prabhav samjhaya jaata hai.</p>
+          <button class="service-link" onclick="openModal()">Consultation Lein <i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-img">
+          <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=500&q=80" alt="Vivah Samasya">
+          <div class="service-img-overlay"></div>
+          <div class="service-badge"><i class="fa-solid fa-heart"></i> Vivah</div>
+        </div>
+        <div class="service-body">
+          <h3>Vivah &amp; Prem Samasya</h3>
+          <p>Vivah mein aa rahi badhaon aur prem sambandhi uljhanon ke liye sahi aur sachha margdarshan.</p>
+          <button class="service-link" onclick="openModal()">Consultation Lein <i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-img">
+          <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=500&q=80" alt="Career Vyapar">
+          <div class="service-img-overlay"></div>
+          <div class="service-badge"><i class="fa-solid fa-briefcase"></i> Career</div>
+        </div>
+        <div class="service-body">
+          <h3>Career &amp; Vyapar</h3>
+          <p>Naukri, business aur dhan-laabh se judi samasyaon ka jyotish-aadharit vishleshan aur salah.</p>
+          <button class="service-link" onclick="openModal()">Consultation Lein <i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-img">
+          <img src="https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?w=500&q=80" alt="Vastu Shastra">
+          <div class="service-img-overlay"></div>
+          <div class="service-badge"><i class="fa-solid fa-house"></i> Vastu</div>
+        </div>
+        <div class="service-body">
+          <h3>Vastu Shastra</h3>
+          <p>Ghar aur office mein vastu dosh ki pehchaan karke saral upayon se sukh-shanti laane ka margdarshan.</p>
+          <button class="service-link" onclick="openModal()">Consultation Lein <i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-img">
+          <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=500&q=80" alt="Tantrik Pooja">
+          <div class="service-img-overlay"></div>
+          <div class="service-badge"><i class="fa-solid fa-hand-sparkles"></i> Pooja</div>
+        </div>
+        <div class="service-body">
+          <h3>Tantrik Pooja Sadhna</h3>
+          <p>Vidhi-vidhan se tantrik pooja aur sadhna, shastron ki paramparaon ke anusaar sampann karwana.</p>
+          <button class="service-link" onclick="openModal()">Consultation Lein <i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-img">
+          <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?w=500&q=80" alt="Ratna Salah">
+          <div class="service-img-overlay"></div>
+          <div class="service-badge"><i class="fa-solid fa-gem"></i> Ratna</div>
+        </div>
+        <div class="service-body">
+          <h3>Ratna &amp; Upaye Salah</h3>
+          <p>Janma kundli ke aadhar par sahi ratna, rudraksha aur upayon ki sahi salah.</p>
+          <button class="service-link" onclick="openModal()">Consultation Lein <i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
