@@ -52,7 +52,9 @@
     background:linear-gradient(90deg,var(--maroon-deep),var(--maroon) 50%,var(--maroon-deep));
     border-bottom:1px solid rgba(205,160,74,0.45);
     height:38px;overflow:hidden;display:flex;align-items:center;
+    transform:translateY(0);transition:transform 0.35s ease;
   }
+  .ticker-bar.hidden{transform:translateY(-100%);}
   .ticker-track{display:flex;align-items:center;white-space:nowrap;animation:marquee 32s linear infinite;}
   .ticker-bar:hover .ticker-track{animation-play-state:paused;}
   .ticker-item{display:inline-flex;align-items:center;gap:9px;color:var(--gold-light);font-size:0.82rem;font-weight:600;letter-spacing:0.03em;padding:0 36px;}
@@ -493,6 +495,7 @@
 
     .trust-float{display:none;}
     .portrait-ornament.top-left,.portrait-ornament.top-right{display:none;}
+    .hero-eyebrow{display:none;}
 
     .services-grid{grid-template-columns:1fr !important;gap:20px;}
     .gallery-grid{grid-template-columns:repeat(2,1fr);gap:12px;}
@@ -520,7 +523,7 @@
 <body>
 
 <!-- TICKER BAR -->
-<div class="ticker-bar">
+<div class="ticker-bar" id="tickerBar">
   <div class="ticker-track">
     <span class="ticker-item"><i class="fa-solid fa-star"></i> 5000+ Happy Clients</span>
     <span class="ticker-item"><i class="fa-solid fa-shield-heart"></i> 100% Private &amp; Trusted</span>
@@ -938,6 +941,18 @@
     document.querySelectorAll('.faq-item.open').forEach(function(el){el.classList.remove('open');});
     if(!isOpen)item.classList.add('open');
   }
+
+  /* Ticker hide on scroll */
+  (function(){
+    var ticker=document.getElementById('tickerBar');
+    var lastY=0;
+    window.addEventListener('scroll',function(){
+      var y=window.scrollY;
+      if(y>lastY && y>60){ticker.classList.add('hidden');}
+      else{ticker.classList.remove('hidden');}
+      lastY=y;
+    },{passive:true});
+  })();
 </script>
 </body>
 </html>
