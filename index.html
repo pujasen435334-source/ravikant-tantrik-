@@ -60,17 +60,17 @@
 
   /* ===== BUTTONS ===== */
   .btn-primary{
-    background:linear-gradient(90deg,var(--saffron) 0%,#c9531a 50%,var(--saffron) 100%);
+    background:linear-gradient(90deg,#1a7fa8 0%,#0f5f82 50%,#1a7fa8 100%);
     background-size:200% auto;
-    color:#fff;padding:16px 32px;border-radius:40px;font-weight:700;font-size:1rem;
-    display:inline-flex;align-items:center;gap:10px;border:none;cursor:pointer;
-    box-shadow:0 10px 30px rgba(232,116,42,0.45);transition:transform .25s,box-shadow .25s,background-position .4s;
+    color:#fff;padding:13px 26px;border-radius:10px;font-weight:700;font-size:0.97rem;
+    display:inline-flex;align-items:center;gap:9px;border:none;cursor:pointer;
+    box-shadow:0 8px 24px rgba(15,95,130,0.45);transition:transform .25s,box-shadow .25s,background-position .4s;
     font-family:'Mukta',sans-serif;
   }
-  .btn-primary:hover{transform:translateY(-3px) scale(1.04);box-shadow:0 14px 38px rgba(232,116,42,0.65);background-position:right center;}
+  .btn-primary:hover{transform:translateY(-2px) scale(1.02);box-shadow:0 12px 32px rgba(15,95,130,0.6);background-position:right center;}
   .btn-ghost{
-    color:var(--gold-light);padding:16px 26px;border-radius:40px;font-weight:600;font-size:1rem;
-    border:1px solid rgba(205,160,74,0.5);display:inline-flex;align-items:center;gap:10px;
+    color:var(--gold-light);padding:13px 22px;border-radius:10px;font-weight:600;font-size:0.97rem;
+    border:1px solid rgba(205,160,74,0.5);display:inline-flex;align-items:center;gap:9px;
     background:transparent;transition:background .25s,border-color .25s;cursor:pointer;font-family:'Mukta',sans-serif;
   }
   .btn-ghost:hover{background:rgba(205,160,74,0.12);border-color:rgba(205,160,74,0.8);}
@@ -486,8 +486,8 @@
     .hero-title{font-size:1.75rem;}
     .hero-tagline{font-size:1.05rem;text-align:left;}
     .hero-desc{font-size:0.94rem;}
-    .hero-actions{flex-direction:column;align-items:center;}
-    .btn-primary,.btn-ghost{width:100%;justify-content:center;}
+    .hero-actions{flex-direction:row;align-items:center;justify-content:center;}
+    .btn-primary,.btn-ghost{width:auto;justify-content:center;}
     .hero-stats{flex-wrap:wrap;}
     .hero-stat{min-width:calc(50% - 1px);}
 
@@ -583,11 +583,8 @@
 
       <div class="hero-actions">
         <button class="btn-primary" onclick="openModal()">
-          <i class="fa-solid fa-hand-holding-heart"></i> Muft Consultation Lein
+          <i class="fa-solid fa-phone-volume"></i> Contact Now
         </button>
-        <a class="btn-ghost" href="https://wa.me/917973328909" target="_blank" rel="noopener">
-          <i class="fa-brands fa-whatsapp"></i> WhatsApp Now
-        </a>
       </div>
 
       <!-- Stats bar -->
