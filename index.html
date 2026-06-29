@@ -1,3 +1,4 @@
+               
 <!DOCTYPE html>
 <html lang="hi">
 <head>
@@ -42,7 +43,6 @@
   @keyframes shimmer{0%{background-position:200% center;}100%{background-position:-200% center;}}
   @keyframes fadeUp{from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
   @keyframes glowPulse{0%,100%{box-shadow:0 0 20px rgba(205,160,74,0.3),0 0 60px rgba(232,116,42,0.1);}50%{box-shadow:0 0 40px rgba(205,160,74,0.6),0 0 80px rgba(232,116,42,0.3);}}
-  @keyframes borderRotate{from{--angle:0deg;}to{--angle:360deg;}}
   @keyframes floatBadge{0%,100%{transform:translateX(-50%) translateY(0);}50%{transform:translateX(-50%) translateY(-6px);}}
   @keyframes starTwinkle{0%,100%{opacity:1;transform:scale(1);}50%{opacity:0.5;transform:scale(0.85);}}
 
@@ -84,16 +84,17 @@
   }
   .modal-submit:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(37,211,102,0.55);}
 
-  /* ===== HERO - NEW PREMIUM DESIGN ===== */
+  /* ===== HERO ===== */
   .hero{
     position:relative;
     min-height:calc(100vh - 38px);
     display:flex;align-items:center;
     overflow:hidden;
     background:#1a0408;
+    /* FIX: No top margin/padding on the section itself */
+    margin-top:0;
   }
 
-  /* Layered background */
   .hero-bg-layer{
     position:absolute;inset:0;
     background:
@@ -103,7 +104,6 @@
       linear-gradient(135deg, #0d0203 0%, #1f0508 30%, #2d0a10 60%, #1a0408 100%);
   }
 
-  /* Grid pattern overlay */
   .hero-grid-overlay{
     position:absolute;inset:0;
     background-image:
@@ -113,7 +113,6 @@
     mask-image:radial-gradient(ellipse at center, black 30%, transparent 80%);
   }
 
-  /* Floating Om symbols */
   .om-float{
     position:absolute;font-family:'Yeseva One',serif;
     color:rgba(205,160,74,0.08);pointer-events:none;user-select:none;
@@ -125,7 +124,6 @@
   .om-float:nth-child(4){font-size:11rem;top:68%;left:50%;animation-delay:3s;animation-duration:11s;opacity:0.04;}
   .om-float:nth-child(5){font-size:5rem;top:5%;left:75%;animation-delay:4s;animation-duration:7s;}
 
-  /* Decorative mandala rings */
   .hero-mandala-ring{
     position:absolute;border-radius:50%;border:1px dashed rgba(205,160,74,0.15);
     top:50%;left:62%;transform:translate(-50%,-50%);
@@ -134,14 +132,14 @@
   .hero-mandala-ring:nth-child(2){width:550px;height:550px;animation:spin 70s linear infinite reverse;}
   .hero-mandala-ring:nth-child(3){width:400px;height:400px;border-color:rgba(232,116,42,0.12);animation:spin 50s linear infinite;}
 
-  /* Hero content layout */
+  /* FIX: Removed top padding from hero-inner on desktop, use padding only on sides/bottom */
   .hero-inner{
     position:relative;z-index:5;
-    width:100%;max-width:1180px;margin:0 auto;padding:80px 24px 60px;
+    width:100%;max-width:1180px;margin:0 auto;
+    padding:40px 24px 60px;   /* <-- WAS 80px top, NOW 40px to remove gap */
     display:grid;grid-template-columns:1fr 420px;gap:60px;align-items:center;
   }
 
-  /* Left text side */
   .hero-text-side{animation:fadeUp .8s ease both;}
 
   .hero-eyebrow{
@@ -197,7 +195,6 @@
 
   .hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:44px;}
 
-  /* Stats bar */
   .hero-stats{
     display:flex;gap:0;
     background:rgba(255,255,255,0.04);
@@ -218,13 +215,11 @@
   }
   .hero-stat-label{font-size:0.75rem;color:rgba(236,211,160,0.6);letter-spacing:0.05em;}
 
-  /* Right portrait side */
   .hero-portrait-side{
     position:relative;display:flex;justify-content:center;align-items:center;
     animation:fadeUp .8s .2s ease both;
   }
 
-  /* Glow halo behind portrait */
   .portrait-glow{
     position:absolute;
     width:380px;height:480px;
@@ -237,7 +232,6 @@
     filter:blur(20px);
   }
 
-  /* Spinning decorative border */
   .portrait-ring{
     position:absolute;
     width:400px;height:490px;
@@ -253,7 +247,6 @@
     animation:spin 30s linear infinite reverse;
   }
 
-  /* Main portrait frame */
   .portrait-frame{
     position:relative;z-index:2;
     width:340px;height:430px;
@@ -274,7 +267,6 @@
     object-fit:cover;object-position:top center;
   }
 
-  /* Corner ornaments */
   .portrait-ornament{
     position:absolute;z-index:3;
     width:50px;height:50px;
@@ -288,7 +280,6 @@
   .portrait-ornament.top-right{top:30px;right:-10px;}
   .portrait-ornament.bottom-left{bottom:60px;left:-15px;}
 
-  /* Name badge below portrait */
   .portrait-name-badge{
     position:absolute;bottom:-22px;left:50%;
     transform:translateX(-50%);
@@ -305,7 +296,6 @@
   }
   .portrait-name-badge i{color:var(--saffron-light);}
 
-  /* Experience pill */
   .portrait-exp-pill{
     position:absolute;top:10px;right:-30px;z-index:10;
     background:linear-gradient(135deg,var(--saffron),#c9531a);
@@ -317,7 +307,6 @@
   .portrait-exp-pill .num{font-size:1.8rem;display:block;line-height:1;}
   .portrait-exp-pill .txt{font-size:0.65rem;text-transform:uppercase;letter-spacing:0.08em;opacity:0.9;font-family:'Mukta',sans-serif;font-weight:600;}
 
-  /* Floating trust badges */
   .trust-float{
     position:absolute;left:-50px;top:50%;transform:translateY(-50%);
     display:flex;flex-direction:column;gap:12px;z-index:10;
@@ -336,7 +325,7 @@
   .trust-badge-text strong{font-size:0.85rem;color:#fff;font-weight:700;}
   .trust-badge-text span{font-size:0.72rem;color:rgba(236,211,160,0.6);}
 
-  /* ===== REST OF STYLES (unchanged) ===== */
+  /* ===== REST OF STYLES ===== */
   .sec-head{text-align:center;max-width:680px;margin:0 auto 50px;}
   .sec-head .eyebrow{display:inline-flex;align-items:center;gap:8px;border-color:rgba(92,14,22,0.25);color:var(--maroon);font-size:0.78rem;letter-spacing:0.16em;text-transform:uppercase;border:1px solid rgba(92,14,22,0.25);padding:6px 14px;border-radius:30px;margin-bottom:22px;}
   .sec-head h2{font-size:2.3rem;color:var(--maroon-deep);margin-bottom:14px;}
@@ -455,15 +444,11 @@
 
   @media(max-width:680px){
     body{padding-bottom:64px;}
-
-    /* HERO MOBILE - Portrait first, then text */
     .hero{min-height:auto;padding:0;}
     .hero-inner{
       display:flex;flex-direction:column;
       gap:0;padding:0;
     }
-
-    /* Portrait goes first on mobile */
     .hero-portrait-side{
       order:1;
       width:100%;
@@ -475,7 +460,6 @@
       padding:30px 20px 50px;
       text-align:center;
     }
-
     .portrait-frame{width:260px;height:330px;}
     .portrait-ring{width:310px;height:385px;}
     .portrait-ring-2{width:330px;height:405px;}
@@ -484,7 +468,6 @@
     .portrait-exp-pill{right:-5px;top:5px;padding:9px 13px;}
     .portrait-exp-pill .num{font-size:1.5rem;}
     .portrait-ornament.bottom-left{display:none;}
-
     .hero-title{font-size:1.75rem;}
     .hero-tagline{font-size:1.05rem;text-align:left;}
     .hero-desc{font-size:0.94rem;}
@@ -492,11 +475,9 @@
     .btn-primary,.btn-ghost{width:auto;justify-content:center;}
     .hero-stats{flex-wrap:wrap;}
     .hero-stat{min-width:calc(50% - 1px);}
-
     .trust-float{display:none;}
     .portrait-ornament.top-left,.portrait-ornament.top-right{display:none;}
     .hero-eyebrow{display:none;}
-
     .services-grid{grid-template-columns:1fr !important;gap:20px;}
     .gallery-grid{grid-template-columns:repeat(2,1fr);gap:12px;}
     .test-card{min-width:calc(100vw - 60px);max-width:calc(100vw - 60px);}
@@ -542,53 +523,42 @@
   </div>
 </div>
 
-<!-- ===== NEW PREMIUM HERO ===== -->
+<!-- HERO -->
 <section class="hero">
   <div class="hero-bg-layer"></div>
   <div class="hero-grid-overlay"></div>
-
-  <!-- Floating Om symbols -->
   <span class="om-float">ॐ</span>
   <span class="om-float">ॐ</span>
   <span class="om-float">ॐ</span>
   <span class="om-float">ॐ</span>
   <span class="om-float">ॐ</span>
-
-  <!-- Decorative mandala rings -->
   <div class="hero-mandala-ring"></div>
   <div class="hero-mandala-ring"></div>
   <div class="hero-mandala-ring"></div>
 
   <div class="hero-inner">
-    <!-- Left: Text -->
     <div class="hero-text-side">
       <div class="hero-eyebrow">
         <div class="dot"></div>
         <span>Vedic Jyotish &bull; Tantrik Sadhna &bull; Vastu</span>
         <div class="dot"></div>
       </div>
-
       <h1 class="hero-title">
         Apki Zindagi Ki Har<br>
         Samasya Ka
         <span class="line-highlight">Vedic Samadhan</span>
       </h1>
-
       <p class="hero-tagline">
         "Jyotish vidya se jeevan ke andhkaar mein prakash"
       </p>
-
       <p class="hero-desc">
         Guru Ravikant Tantrik Ji ke saath apni kundli, vastu, vivah, career aur paisa sambandhi samasyaon ka saral, sachhi aur shastra-sammat margdarshan paayein. 25+ saalon ka anubhav aapki sewa mein.
       </p>
-
       <div class="hero-actions">
         <button class="btn-primary" onclick="openModal()">
           <i class="fa-solid fa-phone-volume"></i> Contact Now
         </button>
       </div>
-
-      <!-- Stats bar -->
       <div class="hero-stats">
         <div class="hero-stat">
           <span class="hero-stat-num">5000+</span>
@@ -609,9 +579,7 @@
       </div>
     </div>
 
-    <!-- Right: Portrait -->
     <div class="hero-portrait-side">
-      <!-- Floating trust badges (desktop only) -->
       <div class="trust-float">
         <div class="trust-badge">
           <i class="fa-solid fa-shield-heart"></i>
@@ -628,24 +596,15 @@
           </div>
         </div>
       </div>
-
-      <!-- Glow + rings -->
       <div class="portrait-glow"></div>
       <div class="portrait-ring"></div>
       <div class="portrait-ring-2"></div>
-
-      <!-- Corner ornaments -->
       <div class="portrait-ornament top-left"><i class="fa-solid fa-om"></i></div>
       <div class="portrait-ornament top-right"><i class="fa-solid fa-star"></i></div>
       <div class="portrait-ornament bottom-left"><i class="fa-solid fa-hand-holding-heart"></i></div>
-
-  
-      <!-- Main photo -->
       <div class="portrait-frame">
         <img src="https://i.ibb.co/fVsN5qkj/IMG-20260629-WA0000.jpg" alt="Guru Ravikant Tantrik Ji">
       </div>
-
-      <!-- Name badge -->
       <div class="portrait-name-badge">
         <i class="fa-solid fa-om"></i>
         Guru Ravikant Tantrik Ji
@@ -935,7 +894,6 @@
     if(!isOpen)item.classList.add('open');
   }
 
-  /* Ticker hide on scroll */
   (function(){
     var ticker=document.getElementById('tickerBar');
     var lastY=0;
@@ -949,3 +907,4 @@
 </script>
 </body>
 </html>
+ 
